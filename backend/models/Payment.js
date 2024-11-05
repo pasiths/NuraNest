@@ -1,41 +1,52 @@
-const {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  CreateDateColumn,
-  UpdateDateColumn,
-} = require("typeorm");
-const { Patient } = require("./Patient.js");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../connect.js"); // Ensure this points to your Sequelize instance
 
-@Entity()
-class Payment {
-  @PrimaryGeneratedColumn({ type: "int" })
-  id;
+// Define the Payment model
+const Payment = sequelize.define(
+  "Payment",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    paymentMethod: {
+      type: DataTypes.STRING(100),
+      allowNull: true, // Assuming it can be null
+    },
+    paymentDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    paymentStatus: {
+      type: DataTypes.STRING(100),
+      allowNull: true, // Assuming it can be null
+    },
+    amount: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false,
+    },
+  },
+  {
+    // Options
+    timestamps: true, // Automatically manage createdAt and updatedAt
+    tableName: "payments", // Specify the table name
+  }
+);
 
-  @Column({ type: "varchar" })
-  paymentMethod;
-
-  @Column({ type: "varchar" })
-  paymentStatus;
-
-  @Column({ type: "varchar" })
-  amount;
-
-  @Column({ type: "date" })
-  paymentDate;
-
-  @Column({ type: "boolean", default: true })
-  status;
-
-  @CreateDateColumn()
-  createdAt;
-
-  @UpdateDateColumn()
-  updatedAt;
-
-  @ManyToOne(() => Patient, (patient) => patient.payments)
-  patient;
-}
+// Associations
+Payment.associate = (models) => {
+  // A Payment belongs to a Patient
+  Payment.belongsTo(models.Patient, {
+    foreignKey: "patientId", // Foreign key in the Payment table
+    as: "patient", // Alias for the association
+    onDelete: "CASCADE", // Deletes payments when the associated patient is deleted
+  });
+};
 
 module.exports = Payment;

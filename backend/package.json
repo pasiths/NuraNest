@@ -19,7 +19,9 @@
     "helmet": "^8.0.0",
     "nodemon": "^3.1.7",
     "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",
+    "sequelize": "^6.37.5",
     "typeorm": "^0.3.20"
   }
 }

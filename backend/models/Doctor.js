@@ -1,23 +1,45 @@
-const { ChildEntity, Column, OneToMany } = require("typeorm");
-const { User } = require("./User.js");
-const { Appointment } = require("./Appointment.js");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../connect.js"); // Ensure this points to your Sequelize instance
+const User = require("./User.js"); // Adjust the path as necessary
 
-@ChildEntity()
-class Doctor extends User {
-  @Column({ type: "varchar" })
-  qualification;
+// Define the Doctor model
+const Doctor = sequelize.define("Doctor", {
+  qualification: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  specialization: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  workplace: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  consultationFee: {
+    type: DataTypes.DOUBLE,
+    allowNull: true,
+  },
+}, 
+{
+  // Options
+  timestamps: true, // Automatically manage createdAt and updatedAt
+  tableName: "doctors", // Specify the table name
+});
 
-  @Column({ type: "varchar" })
-  speciality;
+// Associations
+Doctor.associate = (models) => {
+  // A Doctor belongs to a User
+  Doctor.belongsTo(models.User, {
+    foreignKey: "userId", // Foreign key in the Doctor table
+    as: "user", // Alias for the association
+  });
 
-  @Column({ type: "varchar" })
-  workplace;
-
-  @Column({ type: "double" })
-  consultationFee;
-
-  @OneToMany(() => Appointment, (appointment) => appointment.doctor)
-  appointments;
-}
+  // A Doctor can have many Appointments
+  Doctor.hasMany(models.Appointment, {
+    foreignKey: "doctorId", // Define the foreign key in the Appointment model
+    as: "appointments",
+  });
+};
 
 module.exports = Doctor;
