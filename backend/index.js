@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const sequelize = require("./connect.js");
+const cookieParser = require("cookie-parser");
 require("./models/associations.js");
 const authRoutes = require("./routes/authRoutes.js");
 
@@ -25,6 +26,9 @@ const PORT = process.env.PORT || 8080;
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+// Middleware to parse cookies
+app.use(cookieParser());
 
 // setup the routes
 app.use("/auth", authRoutes);

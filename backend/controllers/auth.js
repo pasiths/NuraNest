@@ -2,8 +2,11 @@ const User = require("../models/User.js");
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const { Op } = require("sequelize");
+const jwt = require("jsonwebtoken");
 
 dotenv.config();
+
+const JWT_SECRET = process.env.JWT;
 
 // Register a new user
 exports.register = async (req, res) => {
@@ -45,4 +48,54 @@ exports.register = async (req, res) => {
       .status(500)
       .json({ message: "Unable to create a user", error: error.message });
   }
+};
+
+// Login a user
+exports.login = async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Find user by username
+    const user = await User.findOne({ where: { username, status: true } });
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    // Check if the password is correct
+    const isMatch = bcrypt.compareSync(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect credentials" });
+    }
+
+    // Generate a JWT Token
+    const token = jwt.sign(
+      {
+        id: user.id,
+        username: user.username,
+        role: user.role,
+      },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    // Send the token and user details (without the password)
+    const { password: userPassword, ...userData } = user.toJSON();
+    res
+      .cookie("accessToken", token, { httpOnly: true, secure: true })
+      .status(200)
+      .json({ message: "User logged in successfully!", user: userData });
+  } catch (error) {
+    console.error("Error logging in user: ", error);
+    return res
+      .status(500)
+      .json({ message: "Unable to login user", error: error.message });
+  }
+};
+
+// Logout a user
+exports.logout = (req, res) => {
+  res.clearCookie("accessToken");
+  res.status(200).json({ message: "User logged out successfully!" });
 };
