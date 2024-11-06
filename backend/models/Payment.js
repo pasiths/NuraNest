@@ -1,52 +1,51 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connect.js"); // Ensure this points to your Sequelize instance
+import { DataTypes } from "sequelize";
+import sequelize from "../connect.js";
+import Patient from "./Patient.js";
 
-// Define the Payment model
+// Define the payment model
 const Payment = sequelize.define(
   "Payment",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     paymentMethod: {
-      type: DataTypes.STRING(100),
-      allowNull: true, // Assuming it can be null
-    },
-    paymentDate: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.ENUM(
+        "credit card",
+        "debit card",
+        "net banking",
+        "wallet",
+        "cash"
+      ),
       allowNull: false,
     },
     paymentStatus: {
-      type: DataTypes.STRING(100),
-      allowNull: true, // Assuming it can be null
+      type: DataTypes.ENUM("pending", "success", "failed"),
+      allowNull: false,
+    },
+    paymentDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     amount: {
-      type: DataTypes.DOUBLE,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
+    },
+    patientId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Patient,
+        key: "id",
+      },
     },
     status: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
       allowNull: false,
+      defaultValue: true,
     },
   },
   {
-    // Options
-    timestamps: true, // Automatically manage createdAt and updatedAt
-    tableName: "payments", // Specify the table name
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 
-// Associations
-Payment.associate = (models) => {
-  // A Payment belongs to a Patient
-  Payment.belongsTo(models.Patient, {
-    foreignKey: "patientId", // Foreign key in the Payment table
-    as: "patient", // Alias for the association
-    onDelete: "CASCADE", // Deletes payments when the associated patient is deleted
-  });
-};
-
-module.exports = Payment;
+export default Payment;

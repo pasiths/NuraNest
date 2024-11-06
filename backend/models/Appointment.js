@@ -1,17 +1,14 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connect.js"); // Ensure this points to your Sequelize instance
+import { DataTypes } from "sequelize";
+import sequelize from "../connect.js";
+import Patient from "./Patient.js";
+import Doctor from "./Doctor.js";
 
-// Define the Appointment model
+// Define the appointment model
 const Appointment = sequelize.define(
   "Appointment",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     appointmentDate: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     appointmentTime: {
@@ -19,45 +16,40 @@ const Appointment = sequelize.define(
       allowNull: false,
     },
     appointmentType: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
+      type: DataTypes.ENUM("online", "physical"),
+      allowNull: false,
     },
     appointmentLocation: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
+      type: DataTypes.STRING,
     },
     additionalInfo: {
       type: DataTypes.TEXT,
-      allowNull: true,
+    },
+    patientId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Patient,
+        key: "id",
+      },
+    },
+    doctorId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Doctor,
+        key: "id",
+      },
     },
     status: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
       allowNull: false,
+      defaultValue: true,
     },
   },
   {
-    // Options
-    timestamps: true, // Automatically manage createdAt and updatedAt
-    tableName: "appointments", // Specify the table name
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 
-// Associations
-Appointment.associate = (models) => {
-  // An Appointment belongs to a Patient
-  Appointment.belongsTo(models.Patient, {
-    foreignKey: "patientId", // Foreign key in the Appointment table
-    as: "patient", // Alias for the association
-    onDelete: "CASCADE", // Deletes appointments when the associated patient is deleted
-  });
-
-  // An Appointment belongs to a Doctor
-  Appointment.belongsTo(models.Doctor, {
-    foreignKey: "doctorId", // Foreign key in the Appointment table
-    as: "doctor", // Alias for the association
-    onDelete: "CASCADE", // Deletes appointments when the associated doctor is deleted
-  });
-};
-
-module.exports = Appointment;
+export default Appointment;

@@ -1,30 +1,34 @@
-const sequelize = require("./connect.js");
-const express = require("express");
+import express from "express";
+import dotenv from "dotenv";
+import sequelize from "./connect.js";
+import "./models/associations.js";
+import authRoutes from "./routes/authRoutes.js";
 
-const app = express();
-
-// Load the environment variables
-require("dotenv").config();
+dotenv.config();
 
 // Initialize the database
 const initializeDatabase = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Database Connection has been established successfully.");
+    console.log("Database connection has been established successfully.");
 
     // Synchronize the models
-    await sequelize.sync({ force: false });
+    await sequelize.sync({ force: true });
     console.log("All models were synchronized successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
 };
 
-// Call the function to initialize the database
 initializeDatabase();
 
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+// Setup the routes
+app.use("auth", authRoutes);
+
 // Start the server
-const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

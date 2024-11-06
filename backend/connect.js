@@ -1,5 +1,5 @@
-const { Sequelize } = require("sequelize");
-const dotenv = require("dotenv");
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
 // Load environment variables from the .env file
 dotenv.config();
@@ -35,4 +35,4 @@ const testConnection = async () => {
 
 testConnection();
 
-module.exports = sequelize; // Export the sequelize instance to use in other parts of your app
+export default sequelize; // Export the sequelize instance to use in other parts of your app

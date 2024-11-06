@@ -1,45 +1,28 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connect.js"); // Ensure this points to your Sequelize instance
-const User = require("./User.js"); // Adjust the path as necessary
+import { DataTypes } from "sequelize";
+import sequelize from "../connect.js";
+import User from "./User.js";
 
-// Define the Doctor model
+// Define the doctor model
 const Doctor = sequelize.define("Doctor", {
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: User,
+      key: "id",
+    },
+  },
   qualification: {
-    type: DataTypes.STRING(255),
-    allowNull: true,
+    type: DataTypes.STRING,
   },
   specialization: {
-    type: DataTypes.STRING(255),
-    allowNull: true,
+    type: DataTypes.STRING,
   },
   workplace: {
-    type: DataTypes.STRING(255),
-    allowNull: true,
+    type: DataTypes.STRING,
   },
   consultationFee: {
-    type: DataTypes.DOUBLE,
-    allowNull: true,
+    type: DataTypes.DECIMAL(10, 2),
   },
-}, 
-{
-  // Options
-  timestamps: true, // Automatically manage createdAt and updatedAt
-  tableName: "doctors", // Specify the table name
 });
 
-// Associations
-Doctor.associate = (models) => {
-  // A Doctor belongs to a User
-  Doctor.belongsTo(models.User, {
-    foreignKey: "userId", // Foreign key in the Doctor table
-    as: "user", // Alias for the association
-  });
-
-  // A Doctor can have many Appointments
-  Doctor.hasMany(models.Appointment, {
-    foreignKey: "doctorId", // Define the foreign key in the Appointment model
-    as: "appointments",
-  });
-};
-
-module.exports = Doctor;
+export default Doctor;

@@ -1,17 +1,13 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connect.js"); // Ensure this points to your Sequelize instance
+import { DataTypes } from "sequelize";
+import sequelize from "../connect.js";
+import Admin from "./Admin.js";
 
-// Define the Blog model
+// Define the blog model
 const Blog = sequelize.define(
   "Blog",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     title: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     body: {
@@ -19,38 +15,32 @@ const Blog = sequelize.define(
       allowNull: false,
     },
     tags: {
-      type: DataTypes.ARRAY(DataTypes.STRING), // Use ARRAY for simple-array equivalent in PostgreSQL
-      allowNull: true,
+      type: DataTypes.ARRAY(DataTypes.STRING),
     },
     description: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+      type: DataTypes.STRING,
     },
     keywords: {
-      type: DataTypes.ARRAY(DataTypes.STRING), // Use ARRAY for simple-array equivalent in PostgreSQL
-      allowNull: true,
+      type: DataTypes.ARRAY(DataTypes.STRING),
+    },
+    authorId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Admin,
+        key: "id",
+      },
     },
     status: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
       allowNull: false,
+      defaultValue: true,
     },
   },
   {
-    // Options
-    timestamps: true, // Automatically manage createdAt and updatedAt
-    tableName: "blogs", // Specify the table name
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 
-// Associations
-Blog.associate = (models) => {
-  // A Blog belongs to an Admin
-  Blog.belongsTo(models.Admin, {
-    foreignKey: "adminId", // Foreign key in the Blog table
-    as: "admin", // Alias for the association
-    onDelete: "CASCADE", // Deletes blogs when the associated admin is deleted
-  });
-};
-
-module.exports = Blog;
+export default Blog;
