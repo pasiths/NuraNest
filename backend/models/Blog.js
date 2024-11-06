@@ -1,8 +1,9 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../connect.js";
-import Admin from "./Admin.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../connect.js");
+const Admin = require("./Admin.js");
 
-// Define the blog model
+// Define the Blog model
+
 const Blog = sequelize.define(
   "Blog",
   {
@@ -43,4 +44,4 @@ const Blog = sequelize.define(
   }
 );
 
-export default Blog;
+module.exports = Blog;

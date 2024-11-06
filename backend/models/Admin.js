@@ -1,8 +1,9 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../connect.js";
-import User from "./User.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../connect.js");
+const User = require("./User.js");
 
-// Define the admin model
+// Define the Admin model
+
 const Admin = sequelize.define("Admin", {
   userId: {
     type: DataTypes.INTEGER,
@@ -13,4 +14,4 @@ const Admin = sequelize.define("Admin", {
   },
 });
 
-export default Admin;
+module.exports = Admin;

@@ -1,9 +1,10 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../connect.js";
-import Patient from "./Patient.js";
-import Doctor from "./Doctor.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../connect.js");
+const Patient = require("./Patient.js");
+const Doctor = require("./Doctor.js");
 
-// Define the appointment model
+// Define the Appointment model
+
 const Appointment = sequelize.define(
   "Appointment",
   {
@@ -52,4 +53,4 @@ const Appointment = sequelize.define(
   }
 );
 
-export default Appointment;
+module.exports = Appointment;

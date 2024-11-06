@@ -1,8 +1,9 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../connect.js";
-import Patient from "./Patient.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../connect.js");
+const Patient = require("./Patient.js");
 
-// Define the payment model
+// Define the Payment model
+
 const Payment = sequelize.define(
   "Payment",
   {
@@ -48,4 +49,4 @@ const Payment = sequelize.define(
   }
 );
 
-export default Payment;
+module.exports = Payment;

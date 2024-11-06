@@ -1,8 +1,9 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../connect.js";
-import User from "./User.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../connect.js");
+const User = require("./User.js");
 
-// Define the patient model
+// Define the Patient model
+
 const Patient = sequelize.define("Patient", {
   userId: {
     type: DataTypes.INTEGER,
@@ -16,4 +17,4 @@ const Patient = sequelize.define("Patient", {
   },
 });
 
-export default Patient;
+module.exports = Patient;

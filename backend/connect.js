@@ -1,10 +1,9 @@
-import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
+const { Sequelize } = require("sequelize");
+const dotenv = require("dotenv");
 
 // Load environment variables from the .env file
 dotenv.config();
 
-// Create a new Sequelize instance and configure the database connection
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -23,7 +22,6 @@ const sequelize = new Sequelize(
   }
 );
 
-// Test the connection to ensure it works
 const testConnection = async () => {
   try {
     await sequelize.authenticate();
@@ -35,4 +33,4 @@ const testConnection = async () => {
 
 testConnection();
 
-export default sequelize; // Export the sequelize instance to use in other parts of your app
+module.exports = sequelize;

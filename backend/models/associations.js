@@ -1,10 +1,10 @@
-import User from "./User.js";
-import Doctor from "./Doctor.js";
-import Patient from "./Patient.js";
-import Admin from "./Admin.js";
-import Appointment from "./Appointment.js";
-import Payment from "./Payment.js";
-import Blog from "./Blog.js";
+const User = require("./User.js");
+const Doctor = require("./Doctor.js");
+const Patient = require("./Patient.js");
+const Admin = require("./Admin.js");
+const Appointment = require("./Appointment.js");
+const Payment = require("./Payment.js");
+const Blog = require("./Blog.js");
 
 // User associations
 User.hasOne(Admin, { foreignKey: "userId" });
@@ -32,4 +32,4 @@ Patient.hasMany(Payment, { foreignKey: "patientId" });
 Payment.belongsTo(Patient, { foreignKey: "patientId" });
 
 // Export all models to use in other parts of the app
-export { User, Doctor, Patient, Admin, Appointment, Payment, Blog };
+module.exports = { User, Doctor, Patient, Admin, Appointment, Payment, Blog };
