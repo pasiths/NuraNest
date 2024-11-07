@@ -4,6 +4,7 @@ const sequelize = require("./connect.js");
 const cookieParser = require("cookie-parser");
 require("./models/associations.js");
 const authRoutes = require("./routes/authRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 
 // setup the routes
 app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
