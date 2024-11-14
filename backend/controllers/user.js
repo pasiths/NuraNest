@@ -60,6 +60,10 @@ exports.updateUser = async (req, res) => {
       user.address = address;
     }
 
+    if (contactNo) {
+      user.contactNo = contactNo;
+    }
+
     // Save the updated user
     await user.save();
 
@@ -70,22 +74,6 @@ exports.updateUser = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Unable to update user", error: error.message });
-  }
-};
-
-// Get all users
-exports.getUsers = async (req, res) => {
-  try {
-    // Find the user with the status filter
-    const users = await User.findAll({ where: { status: true } });
-
-    console.log("Users fetched successfully");
-    return res.status(200).json({ users });
-  } catch (error) {
-    console.error("Error fetching users", error);
-    return res
-      .status(500)
-      .json({ message: "Unable to get users", error: error.message });
   }
 };
 

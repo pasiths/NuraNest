@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 require("./models/associations.js");
 const authRoutes = require("./routes/authRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
+const adminRoutes = require("./routes/adminRoutes.js");
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use(cookieParser());
 // setup the routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/admin", adminRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

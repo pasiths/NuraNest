@@ -41,9 +41,9 @@ const Appointment = sequelize.define(
       },
     },
     status: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.ENUM("active", "cancelled", "completed"),
       allowNull: false,
-      defaultValue: true,
+      defaultValue: "active",
     },
   },
   {
