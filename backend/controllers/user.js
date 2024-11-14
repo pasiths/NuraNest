@@ -1,6 +1,5 @@
-import User from "../models/User.js";
-import bcrypt from "bcryptjs";
-import { Op } from "sequelize";
+const User = require("../models/User.js");
+const bcrypt = require("bcryptjs");
 
 // Update a user
 exports.updateUser = async (req, res) => {
@@ -83,7 +82,7 @@ exports.getUser = async (req, res) => {
 
   try {
     // Find the user by ID
-    const user = await User.findByPk(id);
+    const user = await User.findOne({ where: { id, status: true } });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

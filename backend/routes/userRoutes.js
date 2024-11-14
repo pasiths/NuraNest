@@ -10,6 +10,6 @@ router.put("/:id", updateUser);
 router.get("/:id", getUser);
 
 // Delete a user
-router.delete("/id", deleteUser);
+router.delete("/:id", deleteUser);
 
 module.exports = router;

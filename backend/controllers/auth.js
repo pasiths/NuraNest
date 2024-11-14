@@ -26,7 +26,7 @@ exports.register = async (req, res) => {
 
     // Hash the password
     const salt = bcrypt.genSaltSync(12);
-    const hashedPassword = bcrypt.hash(password, salt);
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
     // Create a new user
     const newUser = await User.create({
