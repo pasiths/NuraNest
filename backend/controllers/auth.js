@@ -52,11 +52,11 @@ exports.register = async (req, res) => {
 
 // Login a user
 exports.login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    // Find user by username
-    const user = await User.findOne({ where: { username, status: true } });
+    // Find user by email
+    const user = await User.findOne({ where: { email, status: true } });
 
     if (!user) {
       return res.status(400).json({ message: "User not found" });
