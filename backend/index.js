@@ -27,6 +27,7 @@ const initializeDatabase = async () => {
 initializeDatabase();
 
 const app = express();
+const IP = process.env.IP || 'localhost'
 const PORT = process.env.PORT || 8080;
 
 // Middleware to parse JSON requests
@@ -43,6 +44,6 @@ app.use("/appointments", appointmentRoutes);
 app.use("/payments", paymentRoutes);
 app.use("/blogs", blogRoutes);
 
-app.listen(PORT, () => {
+app.listen(PORT, IP, () => {
   console.log(`Server is running on port ${PORT}`);
 });
