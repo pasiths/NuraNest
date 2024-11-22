@@ -168,7 +168,42 @@ exports.updateAppointmentStatus = async (req, res) => {
   }
 };
 
-// 
+// Reschedule the appointment
+exports.rescheduleAppointment = async (req, res) => {
+  const { userId } = req.user;
+  const { appointmentId, appointmentDate, appointmentTime } = req.body;
+
+  try {
+    const doctor = await Doctor.findOne({ where: { userId } });
+
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor profile not found" });
+    }
+
+    const appointment = await Appointment.findOne({
+      where: { id: appointmentId, doctorId: doctor.id },
+    });
+
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+
+    appointment.appointmentDate = appointmentDate;
+    appointment.appointmentTime = appointmentTime;
+    await appointment.save();
+
+    return res.status(200).json({
+      message: "Appointment rescheduled successfully",
+      appointment,
+    });
+  } catch (error) {
+    console.error("Error in rescheduling appointment: ", error);
+    return res.status(500).json({
+      message: "Unable to reschedule appointment",
+      error: error.message,
+    });
+  }
+};
 
 // View the patient's profile
 exports.viewPatientProfile = async (req, res) => {
