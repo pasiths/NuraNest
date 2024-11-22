@@ -156,3 +156,174 @@ exports.getCompletedAppointments = async (req, res) => {
       .json({ message: "Unable to get appoinments", error: error.message });
   }
 };
+
+// Admin's blog management functions
+// Create a new Blog post
+exports.createBlog = async (req, res) => {
+  const { title, body, tags, description, keywords } = req.body;
+
+  try {
+    // Create a new Blog post
+    const blog = await Blog.create({
+      title,
+      body,
+      tags,
+      description,
+      keywords,
+      authorId: req.user.id,
+      status: true,
+    });
+
+    console.log("Blog created successfully");
+    return res.status(201).json({ blog });
+  } catch (error) {
+    console.error("Error creating the blog", error);
+    return res.status(500).json({
+      message: "Unable to create the blog",
+      error: error.message,
+    });
+  }
+};
+
+// Update a Blog post
+exports.updateBlog = async (req, res) => {
+  const { id } = req.params;
+  const { title, body, tags, description, keywords } = req.body;
+
+  try {
+    const blog = await Blog.findByPk(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // Update the Blog post
+    if (title) {
+      blog.title = title;
+    }
+
+    if (body) {
+      blog.body = body;
+    }
+
+    if (tags) {
+      blog.tags = tags;
+    }
+
+    if (description) {
+      blog.description = description;
+    }
+
+    if (keywords) {
+      blog.keywords = keywords;
+    }
+
+    await blog.save();
+
+    console.log("Blog updated successfully");
+    return res.status(200).json({ blog });
+  } catch (error) {
+    console.error("Error updating the blog", error);
+    return res.status(500).json({
+      message: "Unable to update the blog",
+      error: error.message,
+    });
+  }
+};
+
+// Delete a Blog post (set status to false)
+exports.deleteBlog = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const blog = await Blog.findByPk(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // Set the Blog status to inactive/false
+    blog.status = false;
+    await blog.save();
+
+    console.log("Blog deleted successfully");
+    return res.status(200).json({ message: "Blog deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting the blog", error);
+    return res.status(500).json({
+      message: "Unable to delete the blog",
+      error: error.message,
+    });
+  }
+};
+
+// Admin payment management functions
+// Get all payments
+exports.getPayments = async (req, res) => {
+  try {
+    // Find all payments
+    const payments = await Payment.findAll();
+
+    console.log("Payments fetched successfully");
+    return res.status(200).json({ payments });
+  } catch (error) {
+    console.error("Error fetching payments", error);
+    return res
+      .status(500)
+      .json({ message: "Unable to get payments", error: error.message });
+  }
+};
+
+// Get all payments where payment status is success
+exports.getSuccessfulPayments = async (req, res) => {
+  try {
+    // Find all payments
+    const payments = await Payment.findAll({
+      where: { paymentStatus: "success" },
+    });
+
+    console.log("Payments fetched successfully");
+    return res.status(200).json({ payments });
+  } catch (error) {
+    console.error("Error fetching payments", error);
+    return res
+      .status(500)
+      .json({ message: "Unable to get payments", error: error.message });
+  }
+};
+
+// Get all payments where payment status is failed
+exports.getFailedPayments = async (req, res) => {
+  try {
+    // Find all payments
+    const payments = await Payment.findAll({
+      where: { paymentStatus: "failed" },
+    });
+
+    console.log("Payments fetched successfully");
+    return res.status(200).json({ payments });
+  } catch (error) {
+    console.error("Error fetching payments", error);
+    return res
+      .status(500)
+      .json({ message: "Unable to get payments", error: error.message });
+  }
+};
+
+// Get all payments where payment status is pending
+exports.getPendingPayments = async (req, res) => {
+  try {
+    // Find all payments
+    const payments = await Payment.findAll({
+      where: { paymentStatus: "pending" },
+    });
+
+    console.log("Payments fetched successfully");
+    return res.status(200).json({ payments });
+  } catch (error) {
+    console.error("Error fetching payments", error);
+    return res
+      .status(500)
+      .json({ message: "Unable to get payments", error: error.message });
+  }
+};
