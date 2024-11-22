@@ -1,7 +1,36 @@
 const User = require("../models/User.js");
+const Admin = require("../models/Admin.js");
 const Appointment = require("../models/Appointment.js");
 const Blog = require("../models/Blog.js");
 const Payment = require("../models/Payment.js");
+
+// Create his/her admin profile using the admin's userId from jwt payload after login
+exports.createAdminProfile = async (req, res) => {
+  const { userId } = req.user;
+
+  try {
+    const existingAdmin = await Admin.findOne({ where: { userId } });
+
+    if (existingAdmin) {
+      return res.status(400).json({ message: "Admin profile already exists" });
+    }
+
+    const newAdmin = await Admin.create({
+      userId,
+    });
+
+    return res.status(201).json({
+      message: "Admin profile created successfully",
+      admin: newAdmin,
+    });
+  } catch (error) {
+    console.error("Error in creating an admin profile: ", error);
+    return res.status(500).json({
+      message: "Unable to create an admin profile",
+      error: error.message,
+    });
+  }
+};
 
 // Admin's user management functions
 // Get all users
