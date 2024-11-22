@@ -8,8 +8,6 @@ const userRoutes = require("./routes/userRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
 const doctorRoutes = require("./routes/doctorRoutes.js");
 const patientRoutes = require("./routes/patientRoutes.js");
-const appointmentRoutes = require("./routes/appointmentRoutes.js");
-const paymentRoutes = require("./routes/paymentRoutes.js");
 const blogRoutes = require("./routes/blogRoutes.js");
 
 dotenv.config();
@@ -44,8 +42,6 @@ app.use("/users", userRoutes);
 app.use("/admin", adminRoutes);
 app.use("/doctors", doctorRoutes);
 app.use("/patients", patientRoutes);
-app.use("/appointments", appointmentRoutes);
-app.use("/payments", paymentRoutes);
 app.use("/blogs", blogRoutes);
 
 app.listen(PORT, IP, () => {
