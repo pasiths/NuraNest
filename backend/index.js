@@ -6,6 +6,8 @@ require("./models/associations.js");
 const authRoutes = require("./routes/authRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
+const doctorRoutes = require("./routes/doctorRoutes.js");
+const patientRoutes = require("./routes/patientRoutes.js");
 const appointmentRoutes = require("./routes/appointmentRoutes.js");
 const paymentRoutes = require("./routes/paymentRoutes.js");
 const blogRoutes = require("./routes/blogRoutes.js");
@@ -27,7 +29,7 @@ const initializeDatabase = async () => {
 initializeDatabase();
 
 const app = express();
-const IP = process.env.IP || 'localhost'
+const IP = process.env.IP || "localhost";
 const PORT = process.env.PORT || 8080;
 
 // Middleware to parse JSON requests
@@ -40,6 +42,8 @@ app.use(cookieParser());
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/admin", adminRoutes);
+app.use("/doctors", doctorRoutes);
+app.use("/patients", patientRoutes);
 app.use("/appointments", appointmentRoutes);
 app.use("/payments", paymentRoutes);
 app.use("/blogs", blogRoutes);
