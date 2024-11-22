@@ -1,3 +1,4 @@
+const User = require("../models/User.js");
 const Doctor = require("../models/Doctor.js");
 const Patient = require("../models/Patient.js");
 const Appointment = require("../models/Appointment.js");
@@ -96,6 +97,43 @@ exports.updateDoctorProfile = async (req, res) => {
     console.error("Error in updating doctor profile: ", error);
     return res.status(500).json({
       message: "Unable to update doctor profile",
+      error: error.message,
+    });
+  }
+};
+
+// Delete the doctor's profile from both patient and user data tables (soft delete setting status to 'false')
+exports.deleteDoctorProfile = async (req, res) => {
+  const { userId } = req.user;
+
+  try {
+    const doctor = await Doctor.findOne({ where: { userId } });
+
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor profile not found" });
+    }
+
+    doctor.status = false;
+    await doctor.save();
+
+    // Find the user record and set the status to false
+    const user = await User.findOne({ where: { id: userId } });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.status = false;
+    await user.save();
+
+    console.log("Doctor profile deleted successfully");
+    return res
+      .status(200)
+      .json({ message: "Doctor profile deleted successfully" });
+  } catch (error) {
+    console.error("Error in deleting doctor profile: ", error);
+    return res.status(500).json({
+      message: "Unable to delete doctor profile",
       error: error.message,
     });
   }
