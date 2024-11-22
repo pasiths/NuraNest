@@ -4,6 +4,7 @@ const {
   updateDoctorProfile,
   getAppointments,
   updateAppointmentStatus,
+  viewPatientProfile,
 } = require("../controllers/doctor.js");
 const express = require("express");
 
@@ -23,5 +24,8 @@ router.get("/appointments", getAppointments);
 
 // Update the status of an appointment
 router.put("/appointments/:appointmentId", updateAppointmentStatus);
+
+// View the patient's profile
+router.get("/patients/:patientId", viewPatientProfile);
 
 module.exports = router;

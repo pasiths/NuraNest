@@ -167,3 +167,31 @@ exports.updateAppointmentStatus = async (req, res) => {
     });
   }
 };
+
+// View the patient's profile
+exports.viewPatientProfile = async (req, res) => {
+  const { userId } = req.user;
+  const { patientId } = req.params;
+
+  try {
+    const doctor = await Doctor.findOne({ where: { userId } });
+
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor profile not found" });
+    }
+
+    const patient = await Patient.findOne({ where: { id: patientId } });
+
+    if (!patient) {
+      return res.status(404).json({ message: "Patient profile not found" });
+    }
+
+    return res.status(200).json({ patient });
+  } catch (error) {
+    console.error("Error in viewing patient profile: ", error);
+    return res.status(500).json({
+      message: "Unable to view patient profile",
+      error: error.message,
+    });
+  }
+};
