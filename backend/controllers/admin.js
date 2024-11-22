@@ -32,43 +32,6 @@ exports.createAdminProfile = async (req, res) => {
   }
 };
 
-// Delete the admin's profile from both patient and user data tables (soft delete setting status to 'false')
-exports.deleteAdminProfile = async (req, res) => {
-  const { userId } = req.user;
-
-  try {
-    const admin = await Admin.findOne({ where: { userId } });
-
-    if (!admin) {
-      return res.status(404).json({ message: "Admin profile not found" });
-    }
-
-    admin.status = false;
-    await admin.save();
-
-    // Find the user record and set the status to false
-    const user = await User.findOne({ where: { id: userId } });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    user.status = false;
-    await user.save();
-
-    console.log("Admin profile deleted successfully");
-    return res
-      .status(200)
-      .json({ message: "Admin profile deleted successfully" });
-  } catch (error) {
-    console.error("Error in deleting admin profile: ", error);
-    return res.status(500).json({
-      message: "Unable to delete admin profile",
-      error: error.message,
-    });
-  }
-};
-
 // Admin's user management functions
 // Get all users
 exports.getUsers = async (req, res) => {

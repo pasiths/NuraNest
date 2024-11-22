@@ -1,4 +1,7 @@
 const User = require("../models/User.js");
+const Patient = require("../models/Patient.js");
+const Doctor = require("../models/Doctor.js");
+const Admin = require("../models/Admin.js");
 const bcrypt = require("bcryptjs");
 
 // Update a user
@@ -113,6 +116,27 @@ exports.deleteUser = async (req, res) => {
     // Set user status to inactive/false
     user.status = false;
     await user.save();
+
+    // Find the associated patient and set status to false
+    const patient = await Patient.findOne({ where: { userId: id } });
+    if (patient) {
+      patient.status = false;
+      await patient.save();
+    }
+
+    // Find the associated doctor and set status to false
+    const doctor = await Doctor.findOne({ where: { userId: id } });
+    if (doctor) {
+      doctor.status = false;
+      await doctor.save();
+    }
+
+    // Find the associated admin and set status to false
+    const admin = await Admin.findOne({ where: { userId: id } });
+    if (admin) {
+      admin.status = false;
+      await admin.save();
+    }
 
     console.log("User deleted successfully");
     return res.status(200).json({ message: "User deleted successfully" });

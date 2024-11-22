@@ -2,7 +2,6 @@ const {
   createDoctorProfile,
   getDoctorProfile,
   updateDoctorProfile,
-  deleteDoctorProfile,
   getAppointments,
   updateAppointmentStatus,
   rescheduleAppointment,
@@ -20,9 +19,6 @@ router.get("/profile", getDoctorProfile);
 
 // Update the doctor's profile
 router.put("/profile", updateDoctorProfile);
-
-// Delete the doctor's profile
-router.delete("/profile", deleteDoctorProfile);
 
 // Get all appointments of the doctor
 router.get("/appointments", getAppointments);

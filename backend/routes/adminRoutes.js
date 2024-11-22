@@ -1,6 +1,5 @@
 const {
   createAdminProfile,
-  deleteAdminProfile,
   getUsers,
   getUser,
   getUserByRole,
@@ -22,9 +21,6 @@ const router = express.Router();
 
 // Create an admin profile
 router.post("/profile", createAdminProfile);
-
-// Delete an admin profile
-router.delete("/profile", deleteAdminProfile);
 
 // Get all users
 router.get("/users", getUsers);

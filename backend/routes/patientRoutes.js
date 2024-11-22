@@ -2,7 +2,6 @@ const {
   createPatientProfile,
   getPatientProfile,
   updatePatientProfile,
-  deletePatientProfile,
   makePayment,
   getPatientPayments,
   viewDoctorProfile,
@@ -28,9 +27,6 @@ router.get("/profile", getPatientProfile);
 
 // Update the patient's profile
 router.put("/profile", updatePatientProfile);
-
-// Delete the patient's profile
-router.delete("/profile", deletePatientProfile);
 
 // Make a payment
 router.post("/payments", makePayment);
