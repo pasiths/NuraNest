@@ -4,17 +4,30 @@ const User = require("./User.js");
 
 // Define the Patient model
 
-const Patient = sequelize.define("Patient", {
-  userId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: User,
-      key: "id",
+const Patient = sequelize.define(
+  "Patient",
+  {
+    userId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: User,
+        key: "id",
+      },
+    },
+    medicalHistory: {
+      type: DataTypes.TEXT,
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
   },
-  medicalHistory: {
-    type: DataTypes.TEXT,
-  },
-});
+  {
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  }
+);
 
 module.exports = Patient;

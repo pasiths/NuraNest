@@ -168,6 +168,8 @@ exports.updateAppointmentStatus = async (req, res) => {
   }
 };
 
+// 
+
 // View the patient's profile
 exports.viewPatientProfile = async (req, res) => {
   const { userId } = req.user;
