@@ -17,6 +17,11 @@ const Patient = sequelize.define(
     medicalHistory: {
       type: DataTypes.TEXT,
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "patient",
+    },
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

@@ -17,6 +17,7 @@ exports.createAdminProfile = async (req, res) => {
 
     const newAdmin = await Admin.create({
       userId,
+      role: "admin",
     });
 
     return res.status(201).json({

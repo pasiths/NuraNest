@@ -22,6 +22,7 @@ exports.createDoctorProfile = async (req, res) => {
       specialization,
       workplace,
       consultationFee,
+      role: "doctor",
     });
 
     return res.status(201).json({

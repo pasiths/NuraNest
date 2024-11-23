@@ -29,6 +29,11 @@ const Doctor = sequelize.define(
     availableDates: {
       type: DataTypes.STRING,
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "doctor",
+    },
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

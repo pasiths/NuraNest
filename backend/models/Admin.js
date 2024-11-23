@@ -14,6 +14,11 @@ const Admin = sequelize.define(
         key: "id",
       },
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "admin",
+    },
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

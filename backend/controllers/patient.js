@@ -21,6 +21,7 @@ exports.createPatientProfile = async (req, res) => {
     const newPatient = await Patient.create({
       userId,
       medicalHistory,
+      role: "patient",
     });
 
     console.log("Patient profile created successfully");
