@@ -46,7 +46,12 @@
 - **URL:** `users/:id`
 - **Method:** `GET`
 
-#### 5. **Update a User**
+#### 7. **Retrieve Users**
+
+- **URL:** `users/`
+- **Method:** `GET`
+
+#### 6. **Update a User**
 
 - **URL:** `users/:id`
 - **Method:** `PUT`
@@ -58,13 +63,51 @@
 }
 ```
 
-#### 6. **Delete User by ID**
+#### 7. **Delete User by ID**
 
 - **URL:** `users/:id`
 - **Method:** `DELETE`
 
-#### 7. **Get User by ID**
+#### 8. **Create a Blog post**
 
-- **URL:** `users/:id`
+- **URL:** `blogs/`
+- **Method:** `POST`
+- **Request Body:**
+
+```json
+{
+  "title": "The Psychology of Habits",
+  "body": "Habits shape our daily lives and influence our long-term success...",
+  "tags": ["Psychology", "Habits", "Self-improvement"],
+  "description": "An exploration of how habits form and their impact on behavior.",
+  "keywords": ["psychology", "habits", "behavior"],
+  "authorId": 1
+}
+```
+
+#### 9. **Update a Blog post**
+
+- **URL:** `blogs/:id`
+- **Method:** `PUT`
+- **Request Body:**
+
+```json
+{
+    "body": "Updated insights into how habits form, change, and influence behavior..."
+}
+```
+
+#### 10. **Retrieve a Blog post by ID**
+
+- **URL:** `blogs/:id`
 - **Method:** `GET`
 
+#### 11. **Retrieve Blog posts**
+
+- **URL:** `blogs/`
+- **Method:** `GET`
+
+#### 11. **Delete a Blog post**
+
+- **URL:** `blogs/:id`
+- **Method:** `DELETE`
