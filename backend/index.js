@@ -40,6 +40,7 @@ app.use(cookieParser());
 // setup the routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/doctors", doctorRoutes);
 app.use("/blogs", blogRoutes);
 app.use("/appointments", appointmentRoutes);
 

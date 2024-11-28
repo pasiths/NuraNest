@@ -26,8 +26,8 @@ const Doctor = sequelize.define(
     consultationFee: {
       type: DataTypes.DECIMAL(10, 2),
     },
-    availableDates: {
-      type: DataTypes.STRING,
+    availableDays: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
     },
     role: {
       type: DataTypes.STRING,
