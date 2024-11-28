@@ -1,4 +1,5 @@
 const Admin = require("../models/Admin.js");
+const logger = require("../middlewares/logger.js");
 
 // Create a new Admin
 exports.createAdmin = async (req, res) => {
@@ -11,10 +12,10 @@ exports.createAdmin = async (req, res) => {
       status: true,
     });
 
-    console.log("Admin has been created successfully");
+    logger.info("Admin has been created successfully");
     return res.status(201).json({ admin });
   } catch (error) {
-    console.error("Error creating the admin", error);
+    logger.error("Error creating the admin", error);
     return res.status(500).json({
       message: "Unable to create the admin",
       error: error.message,
@@ -27,10 +28,10 @@ exports.getAdmins = async (req, res) => {
   try {
     const admins = await Admin.findAll();
 
-    console.log("Admins have been retrieved successfully");
+    logger.info("Admins have been retrieved successfully");
     return res.status(200).json({ admins });
   } catch (error) {
-    console.error("Error getting the admins", error);
+    logger.error("Error getting the admins", error);
     return res.status(500).json({
       message: "Unable to get the admins",
       error: error.message,
@@ -49,10 +50,10 @@ exports.getAdmin = async (req, res) => {
       return res.status(404).json({ message: "Admin not found" });
     }
 
-    console.log("Admin has been retrieved successfully");
+    logger.info("Admin has been retrieved successfully");
     return res.status(200).json({ admin });
   } catch (error) {
-    console.error("Error getting the admin", error);
+    logger.error("Error getting the admin", error);
     return res.status(500).json({
       message: "Unable to get the admin",
       error: error.message,
@@ -74,10 +75,10 @@ exports.deleteAdmin = async (req, res) => {
       admin.status = false;
       await admin.save();
   
-      console.log("Admin has been deleted successfully");
+      logger.info("Admin has been deleted successfully");
       return res.status(200).json({ admin });
     } catch (error) {
-      console.error("Error deleting the admin", error);
+      logger.error("Error deleting the admin", error);
       return res.status(500).json({
         message: "Unable to delete the admin",
         error: error.message,
