@@ -39,7 +39,19 @@ exports.register = async (req, res) => {
       status: true,
     });
 
+    // Generate a JWT Token
+    const token = jwt.sign(
+      {
+        id: user.id,
+        username: user.username,
+        role: user.role,
+      },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
     return res
+      .cookie("accessToken", token, { httpOnly: true, secure: true })
       .status(201)
       .json({ message: "User created successfully", user: newUser });
   } catch (error) {

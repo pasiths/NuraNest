@@ -39,9 +39,6 @@ app.use(cookieParser());
 // setup the routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-app.use("/admin", adminRoutes);
-app.use("/doctors", doctorRoutes);
-app.use("/patients", patientRoutes);
 app.use("/blogs", blogRoutes);
 
 app.listen(PORT, IP, () => {

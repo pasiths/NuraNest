@@ -62,3 +62,9 @@
 
 - **URL:** `users/:id`
 - **Method:** `DELETE`
+
+#### 7. **Get User by ID**
+
+- **URL:** `users/:id`
+- **Method:** `GET`
+
