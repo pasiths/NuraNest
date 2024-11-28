@@ -101,6 +101,22 @@ exports.getUser = async (req, res) => {
   }
 };
 
+// Get all users
+exports.getUsers = async (req, res) => {
+  try {
+    // Find all users
+    const users = await User.findAll({ where: { status: true } });
+
+    console.log("Users fetched successfully");
+    return res.status(200).json({ users });
+  } catch (error) {
+    console.error("Error fetching the users", error);
+    return res
+      .status(500)
+      .json({ message: "Unable to get the users", error: error.message });
+  }
+};
+
 // Delete a user (set status to false)
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;
