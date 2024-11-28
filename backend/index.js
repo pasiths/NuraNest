@@ -10,6 +10,7 @@ const doctorRoutes = require("./routes/doctorRoutes.js");
 const patientRoutes = require("./routes/patientRoutes.js");
 const blogRoutes = require("./routes/blogRoutes.js");
 const appointmentRoutes = require("./routes/appointmentRoutes.js");
+const paymentRoutes = require("./routes/paymentRoutes.js");
 
 dotenv.config();
 
@@ -45,6 +46,7 @@ app.use("/doctors", doctorRoutes);
 app.use("/patients", patientRoutes);
 app.use("/blogs", blogRoutes);
 app.use("/appointments", appointmentRoutes);
+app.use("/payments", paymentRoutes);
 
 app.listen(PORT, IP, () => {
   console.log(`Server is running on port ${PORT}`);
