@@ -9,6 +9,7 @@ const adminRoutes = require("./routes/adminRoutes.js");
 const doctorRoutes = require("./routes/doctorRoutes.js");
 const patientRoutes = require("./routes/patientRoutes.js");
 const blogRoutes = require("./routes/blogRoutes.js");
+const appointmentRoutes = require("./routes/appointmentRoutes.js");
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.use(cookieParser());
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/blogs", blogRoutes);
+app.use("/appointments", appointmentRoutes);
 
 app.listen(PORT, IP, () => {
   console.log(`Server is running on port ${PORT}`);
