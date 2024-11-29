@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const dotenv = require("dotenv");
+const logger = require("./middlewares/logger.js");
 
 // Load environment variables from the .env file
 dotenv.config();
@@ -25,9 +26,9 @@ const sequelize = new Sequelize(
 const testConnection = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Database connection has been established successfully.");
+    logger.info("Database connection has been established successfully.");
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    logger.error("Unable to connect to the database:", error);
   }
 };
 

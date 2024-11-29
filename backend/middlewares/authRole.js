@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const logger = require("./logger.js");
 
 const JWT = process.env.JWT;
 
@@ -18,7 +19,7 @@ exports.verifyToken = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    console.error("Error verifying the token", error);
+    logger.error("Error verifying the token", error);
     return res
       .status(401)
       .json({ message: "Unable to verify token", error: error.message });

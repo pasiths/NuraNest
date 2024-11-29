@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
+const logger = require("../middlewares/logger.js");
 
 dotenv.config();
 
@@ -50,12 +51,13 @@ exports.register = async (req, res) => {
       { expiresIn: "1h" }
     );
 
+    logger.info("User created successfully");
     return res
       .cookie("accessToken", token, { httpOnly: true, secure: true })
       .status(201)
       .json({ message: "User created successfully", user: newUser });
   } catch (error) {
-    console.error("Error in registering a user: ", error);
+    logger.error("Error in registering a user: ", error);
     return res
       .status(500)
       .json({ message: "Unable to create a user", error: error.message });
@@ -94,12 +96,14 @@ exports.login = async (req, res) => {
 
     // Send the token and user details (without the password)
     const { password: userPassword, ...userData } = user.toJSON();
+
+    logger.info("User logged in successfully");
     res
       .cookie("accessToken", token, { httpOnly: true, secure: true })
       .status(200)
       .json({ message: "User logged in successfully!", user: userData });
   } catch (error) {
-    console.error("Error logging in user: ", error);
+    logger.error("Error logging in user: ", error);
     return res
       .status(500)
       .json({ message: "Unable to login user", error: error.message });
@@ -109,5 +113,6 @@ exports.login = async (req, res) => {
 // Logout a user
 exports.logout = (req, res) => {
   res.clearCookie("accessToken");
+  logger.info("User logged out successfully");
   res.status(200).json({ message: "User logged out successfully!" });
 };

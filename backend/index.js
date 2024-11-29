@@ -11,18 +11,19 @@ const patientRoutes = require("./routes/patientRoutes.js");
 const blogRoutes = require("./routes/blogRoutes.js");
 const appointmentRoutes = require("./routes/appointmentRoutes.js");
 const paymentRoutes = require("./routes/paymentRoutes.js");
+const logger = require("./middlewares/logger.js");
 
 dotenv.config();
 
 const initializeDatabase = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Database connection has been established successfully.");
+    logger.info("Database connection has been established successfully.");
 
     await sequelize.sync({ force: false });
-    console.log("All models were synchronized successfully.");
+    logger.info("All models were synchronized successfully.");
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    logger.error("Unable to connect to the database:", error);
   }
 };
 

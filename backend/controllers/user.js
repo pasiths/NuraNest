@@ -3,6 +3,7 @@ const Patient = require("../models/Patient.js");
 const Doctor = require("../models/Doctor.js");
 const Admin = require("../models/Admin.js");
 const bcrypt = require("bcryptjs");
+const logger = require("../middlewares/logger.js");
 
 // Update a user
 exports.updateUser = async (req, res) => {
@@ -69,10 +70,10 @@ exports.updateUser = async (req, res) => {
     // Save the updated user
     await user.save();
 
-    console.log("User updated successfully");
+    logger.info("User updated successfully");
     return res.status(200).json({ message: "User updated", user });
   } catch (error) {
-    console.error("Error in updating a user: ", error);
+    logger.error("Error in updating a user: ", error);
     return res
       .status(500)
       .json({ message: "Unable to update user", error: error.message });
@@ -91,10 +92,10 @@ exports.getUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("User fetched successfully");
+    logger.info("User fetched successfully");
     return res.status(200).json({ user });
   } catch (error) {
-    console.error("Error fetching the user", error);
+    logger.error("Error fetching the user", error);
     return res
       .status(500)
       .json({ message: "Unable to get the user", error: error.message });
@@ -107,10 +108,10 @@ exports.getUsers = async (req, res) => {
     // Find all users
     const users = await User.findAll({ where: { status: true } });
 
-    console.log("Users fetched successfully");
+    logger.info("Users fetched successfully");
     return res.status(200).json({ users });
   } catch (error) {
-    console.error("Error fetching the users", error);
+    logger.error("Error fetching the users", error);
     return res
       .status(500)
       .json({ message: "Unable to get the users", error: error.message });
@@ -154,10 +155,10 @@ exports.deleteUser = async (req, res) => {
       await admin.save();
     }
 
-    console.log("User deleted successfully");
+    logger.info("User deleted successfully");
     return res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
-    console.error("Error deleting the user", error);
+    logger.error("Error deleting the user", error);
     return res
       .status(500)
       .json({ message: "Unable to delete the user", error: error.message });

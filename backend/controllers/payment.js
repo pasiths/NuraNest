@@ -1,4 +1,5 @@
 const Payment = require("../models/Payment.js");
+const logger = require("../middlewares/logger.js");
 
 // Create a Payment
 exports.createPayment = async (req, res) => {
@@ -16,10 +17,10 @@ exports.createPayment = async (req, res) => {
       status: true,
     });
 
-    console.log("Payment created successfully");
+    logger.info("Payment created successfully");
     return res.status(201).json({ payment });
   } catch (error) {
-    console.error("Error creating the payment", error);
+    logger.error("Error creating the payment", error);
     return res.status(500).json({
       message: "Unable to create the payment",
       error: error.message,
@@ -64,10 +65,10 @@ exports.updatePayment = async (req, res) => {
 
     await payment.save();
 
-    console.log("Payment updated successfully");
+    logger.info("Payment updated successfully");
     return res.status(200).json({ payment });
   } catch (error) {
-    console.error("Error updating the payment", error);
+    logger.error("Error updating the payment", error);
     return res.status(500).json({
       message: "Unable to update the payment",
       error: error.message,
@@ -80,10 +81,10 @@ exports.getAllPayments = async (req, res) => {
   try {
     const payments = await Payment.findAll();
 
-    console.log("Payments retrieved successfully");
+    logger.info("Payments retrieved successfully");
     return res.status(200).json({ payments });
   } catch (error) {
-    console.error("Error getting the payments", error);
+    logger.error("Error getting the payments", error);
     return res.status(500).json({
       message: "Unable to get the payments",
       error: error.message,
@@ -102,10 +103,10 @@ exports.getPaymentById = async (req, res) => {
       return res.status(404).json({ message: "Payment not found" });
     }
 
-    console.log("Payment retrieved successfully");
+    logger.info("Payment retrieved successfully");
     return res.status(200).json({ payment });
   } catch (error) {
-    console.error("Error getting the payment", error);
+    logger.error("Error getting the payment", error);
     return res.status(500).json({
       message: "Unable to get the payment",
       error: error.message,
@@ -127,10 +128,10 @@ exports.deletePayment = async (req, res) => {
     payment.status = false;
     await payment.save();
 
-    console.log("Payment deleted successfully");
+    logger.info("Payment deleted successfully");
     return res.status(200).json({ id });
   } catch (error) {
-    console.error("Error deleting the payment", error);
+    logger.error("Error deleting the payment", error);
     return res.status(500).json({
       message: "Unable to delete the payment",
       error: error.message,

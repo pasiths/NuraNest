@@ -1,4 +1,5 @@
 const Patient = require("../models/Patient.js");
+const logger = require("../middlewares/logger.js");
 
 // Create a new Patient
 exports.createPatient = async (req, res) => {
@@ -12,10 +13,10 @@ exports.createPatient = async (req, res) => {
       status: true,
     });
 
-    console.log("Patient has been created successfully");
+    logger.info("Patient has been created successfully");
     return res.status(201).json({ patient });
   } catch (error) {
-    console.error("Error creating the patient", error);
+    logger.error("Error creating the patient", error);
     return res.status(500).json({
       message: "Unable to create the patient",
       error: error.message,
@@ -41,10 +42,10 @@ exports.updatePatient = async (req, res) => {
 
     await patient.save();
 
-    console.log("Patient has been updated successfully");
+    logger.info("Patient has been updated successfully");
     return res.status(200).json({ patient });
   } catch (error) {
-    console.error("Error updating the patient", error);
+    logger.error("Error updating the patient", error);
     return res.status(500).json({
       message: "Unable to update the patient",
       error: error.message,
@@ -57,10 +58,10 @@ exports.getPatients = async (req, res) => {
   try {
     const patients = await Patient.findAll();
 
-    console.log("Patients have been retrieved successfully");
+    logger.info("Patients have been retrieved successfully");
     return res.status(200).json({ patients });
   } catch (error) {
-    console.error("Error getting the patients", error);
+    logger.error("Error getting the patients", error);
     return res.status(500).json({
       message: "Unable to get the patients",
       error: error.message,
@@ -79,10 +80,10 @@ exports.getPatient = async (req, res) => {
       return res.status(404).json({ message: "Patient not found" });
     }
 
-    console.log("Patient has been retrieved successfully");
+    logger.info("Patient has been retrieved successfully");
     return res.status(200).json({ patient });
   } catch (error) {
-    console.error("Error getting the patient", error);
+    logger.error("Error getting the patient", error);
     return res.status(500).json({
       message: "Unable to get the patient",
       error: error.message,
@@ -104,10 +105,10 @@ exports.deletePatient = async (req, res) => {
     patient.status = false;
     await patient.save();
 
-    console.log("Patient has been deleted successfully");
+    logger.info("Patient has been deleted successfully");
     return res.status(200).json({ patient });
   } catch (error) {
-    console.error("Error deleting the patient", error);
+    logger.error("Error deleting the patient", error);
     return res.status(500).json({
       message: "Unable to delete the patient",
       error: error.message,

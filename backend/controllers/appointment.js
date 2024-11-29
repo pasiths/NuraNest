@@ -1,4 +1,5 @@
 const Appointment = require("../models/Appointment.js");
+const logger = require("../middlewares/logger.js");
 
 // Create an Appointment
 exports.createAppointment = async (req, res) => {
@@ -25,10 +26,10 @@ exports.createAppointment = async (req, res) => {
       status: "active",
     });
 
-    console.log("Appointment created successfully");
+    logger.info("Appointment created successfully");
     return res.status(201).json({ appointment });
   } catch (error) {
-    console.error("Error creating the appointment", error);
+    logger.error("Error creating the appointment", error);
     return res.status(500).json({
       message: "Unable to create the appointment",
       error: error.message,
@@ -89,10 +90,10 @@ exports.updateAppointment = async (req, res) => {
     // Save the updated Appointment
     await appointment.save();
 
-    console.log("Appointment updated successfully");
+    logger.info("Appointment updated successfully");
     return res.status(200).json({ appointment });
   } catch (error) {
-    console.error("Error updating the appointment", error);
+    logger.error("Error updating the appointment", error);
     return res.status(500).json({
       message: "Unable to update the appointment",
       error: error.message,
@@ -112,9 +113,10 @@ exports.getAppointmentById = async (req, res) => {
       return res.status(404).json({ message: "Appointment not found" });
     }
 
+    logger.info("Appointment has been retrieved successfully");
     return res.status(200).json({ appointment });
   } catch (error) {
-    console.error("Error getting the appointment", error);
+    logger.error("Error getting the appointment", error);
     return res.status(500).json({
       message: "Unable to get the appointment",
       error: error.message,
@@ -128,9 +130,10 @@ exports.getAppointments = async (req, res) => {
     // Find all Appointments
     const appointments = await Appointment.findAll();
 
+    logger.info("Appointments have been retrieved successfully");
     return res.status(200).json({ appointments });
   } catch (error) {
-    console.error("Error getting the appointments", error);
+    logger.error("Error getting the appointments", error);
     return res.status(500).json({
       message: "Unable to get the appointments",
       error: error.message,
@@ -153,10 +156,10 @@ exports.deleteAppointment = async (req, res) => {
     // Soft delete the Appointment
     await appointment.update({ status: "cancelled" });
 
-    console.log("Appointment cancelled successfully");
+    logger.info("Appointment cancelled successfully");
     return res.status(200).json({ message: "Appointment cancelled" });
   } catch (error) {
-    console.error("Error cancelling the appointment", error);
+    logger.error("Error cancelling the appointment", error);
     return res.status(500).json({
       message: "Unable to cancel the appointment",
       error: error.message,

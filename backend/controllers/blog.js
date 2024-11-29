@@ -1,4 +1,5 @@
 const Blog = require("../models/Blog.js");
+const logger = require("../middlewares/logger.js");
 
 // Create a Blog
 exports.createBlog = async (req, res) => {
@@ -16,10 +17,10 @@ exports.createBlog = async (req, res) => {
       status: true,
     });
 
-    console.log("Blog created successfully");
+    logger.info("Blog created successfully");
     return res.status(201).json({ blog });
   } catch (error) {
-    console.error("Error creating the blog", error);
+    logger.error("Error creating the blog", error);
     return res.status(500).json({
       message: "Unable to create the blog",
       error: error.message,
@@ -67,10 +68,10 @@ exports.updateBlog = async (req, res) => {
 
     await blog.save();
 
-    console.log("Blog updated successfully");
+    logger.info("Blog updated successfully");
     return res.status(200).json({ blog });
   } catch (error) {
-    console.error("Error updating the blog", error);
+    logger.error("Error updating the blog", error);
     return res.status(500).json({
       message: "Unable to update the blog",
       error: error.message,
@@ -90,10 +91,10 @@ exports.getBlogById = async (req, res) => {
       return res.status(404).json({ message: "Blog not found" });
     }
 
-    console.log("Blog retrieved successfully");
+    logger.info("Blog retrieved successfully");
     return res.status(200).json({ blog });
   } catch (error) {
-    console.error("Error getting the blog", error);
+    logger.error("Error getting the blog", error);
     return res.status(500).json({
       message: "Unable to get the blog",
       error: error.message,
@@ -107,10 +108,10 @@ exports.getBlogs = async (req, res) => {
     // Find all Blogs
     const blogs = await Blog.findAll();
 
-    console.log("Blogs retrieved successfully");
+    logger.info("Blogs retrieved successfully");
     return res.status(200).json({ blogs });
   } catch (error) {
-    console.error("Error getting the blogs", error);
+    logger.error("Error getting the blogs", error);
     return res.status(500).json({
       message: "Unable to get the blogs",
       error: error.message,
@@ -134,10 +135,10 @@ exports.deleteBlog = async (req, res) => {
     blog.status = false;
     await blog.save();
 
-    console.log("Blog deleted successfully");
+    logger.info("Blog deleted successfully");
     return res.status(200).json({ message: "Blog deleted successfully" });
   } catch (error) {
-    console.error("Error deleting the blog", error);
+    logger.error("Error deleting the blog", error);
     return res.status(500).json({
       message: "Unable to delete the blog",
       error: error.message,
