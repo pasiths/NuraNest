@@ -4,6 +4,14 @@ const {
   getAppointmentById,
   getAppointments,
   deleteAppointment,
+  rescheduleAppointment,
+  updateAppointmentStatus,
+  getAppointmentsByPatient,
+  getActiveAppointmentsByPatient,
+  getUpcomingAppointmentsByPatient,
+  getAppointmentsByDoctor,
+  getActiveAppointmentsByDoctor,
+  getUpcomingAppointmentsByDoctor,
 } = require("../controllers/appointment.js");
 const {
   verifyToken,
@@ -28,5 +36,37 @@ router.get("/", verifyToken, isAdmin, getAppointments);
 
 // Delete an Appointment
 router.delete("/:id", verifyToken, isOwnerOrAdmin, deleteAppointment);
+
+// Reschedule an Appointment
+router.put("/:id/reschedule", verifyToken, rescheduleAppointment);
+
+// Update an Appointment's status
+router.put("/:id/status", verifyToken, updateAppointmentStatus);
+
+// Get all Appointments by Patient
+router.get("/patient/:id", verifyToken, getAppointmentsByPatient);
+
+// Get all Active Appointments by Patient
+router.get("/patient/:id/active", verifyToken, getActiveAppointmentsByPatient);
+
+// Get all Upcoming Appointments by Patient
+router.get(
+  "/patient/:id/upcoming",
+  verifyToken,
+  getUpcomingAppointmentsByPatient
+);
+
+// Get all Appointments by Doctor
+router.get("/doctor/:id", verifyToken, getAppointmentsByDoctor);
+
+// Get all Active Appointments by Doctor
+router.get("/doctor/:id/active", verifyToken, getActiveAppointmentsByDoctor);
+
+// Get all Upcoming Appointments by Doctor
+router.get(
+  "/doctor/:id/upcoming",
+  verifyToken,
+  getUpcomingAppointmentsByDoctor
+);
 
 module.exports = router;
