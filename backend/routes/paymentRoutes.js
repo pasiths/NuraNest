@@ -6,11 +6,7 @@ const {
   deletePayment,
   getPaymentsByPatientId,
 } = require("../controllers/payment.js");
-const {
-  verifyToken,
-  isAdmin,
-  isOwnerOrAdmin,
-} = require("../middlewares/authRole.js");
+const { verifyToken, isAdmin } = require("../middlewares/authRole.js");
 const express = require("express");
 
 const router = express.Router();
@@ -19,18 +15,24 @@ const router = express.Router();
 router.post("/", verifyToken, createPayment);
 
 // Update a Payment
-router.put("/:id", verifyToken, isOwnerOrAdmin, updatePayment);
+router.put("/:id", verifyToken, isOwner, isAdmin, updatePayment);
 
 // Get all Payments
 router.get("/", verifyToken, isAdmin, getAllPayments);
 
 // Get a Payment by ID
-router.get("/:id", verifyToken, isOwnerOrAdmin, getPaymentById);
+router.get("/:id", verifyToken, isOwner, isAdmin, getPaymentById);
 
 // Get Payments by Patient ID
-router.get("/patients/:patientId", verifyToken, isOwnerOrAdmin, getPaymentsByPatientId);
+router.get(
+  "/patients/:patientId",
+  verifyToken,
+  isOwner,
+  isAdmin,
+  getPaymentsByPatientId
+);
 
 // Delete a Payment
-router.delete("/:id", verifyToken, isOwnerOrAdmin, deletePayment);
+router.delete("/:id", verifyToken, isOwner, isAdmin, deletePayment);
 
 module.exports = router;

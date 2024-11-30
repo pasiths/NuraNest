@@ -35,12 +35,19 @@ exports.isAdmin = (req, res, next) => {
   next();
 };
 
-// Middleware to check if the user is the owner of the resource or an admin
-exports.isOwnerOrAdmin = (req, res, next) => {
-  if (req.user.role !== "admin" && req.user.id !== req.params.id) {
-    return res
-      .status(403)
-      .json({ message: "Access Denied! Owner or Admin only" });
+// Middleware to check if the user is the owner of the resource
+exports.isOwner = (req, res, next) => {
+  if (req.user.id !== req.params.id) {
+    return res.status(403).json({ message: "Access Denied! Unauthorized" });
+  }
+
+  next();
+};
+
+// Middleware to check if the user is a doctor
+exports.isDoctor = (req, res, next) => {
+  if (req.user.role !== "doctor") {
+    return res.status(403).json({ message: "Access Denied! Doctor only" });
   }
 
   next();

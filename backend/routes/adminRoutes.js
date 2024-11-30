@@ -4,7 +4,7 @@ const {
   getAdmins,
   deleteAdmin,
 } = require("../controllers/admin.js");
-const { verifyToken } = require("../middlewares/authRole.js");
+const { verifyToken, isAdmin } = require("../middlewares/authRole.js");
 const express = require("express");
 
 const router = express.Router();
@@ -13,12 +13,12 @@ const router = express.Router();
 router.post("/", verifyToken, createAdmin);
 
 // Get all Admins
-router.get("/", verifyToken, getAdmins);
+router.get("/", verifyToken, isAdmin, getAdmins);
 
 // Get a single Admin
-router.get("/:id", verifyToken, getAdmin);
+router.get("/:id", verifyToken, isAdmin, getAdmin);
 
 // Delete a single Admin
-router.delete("/:id", verifyToken, deleteAdmin);
+router.delete("/:id", verifyToken, isAdmin, deleteAdmin);
 
 module.exports = router;

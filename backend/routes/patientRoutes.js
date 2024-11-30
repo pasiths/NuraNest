@@ -5,11 +5,7 @@ const {
   getPatients,
   deletePatient,
 } = require("../controllers/patient.js");
-const {
-  verifyToken,
-  isOwnerOrAdmin,
-  isAdmin,
-} = require("../middlewares/authRole.js");
+const { verifyToken, isAdmin, isOwner } = require("../middlewares/authRole.js");
 const express = require("express");
 
 const router = express.Router();
@@ -18,15 +14,15 @@ const router = express.Router();
 router.post("/", verifyToken, createPatient);
 
 // Update a Patient
-router.put("/:id", verifyToken, isOwnerOrAdmin, updatePatient);
+router.put("/:id", verifyToken, isOwner, isAdmin, updatePatient);
 
 // Get all Patients
 router.get("/", verifyToken, isAdmin, getPatients);
 
 // Get a single Patient
-router.get("/:id", verifyToken, isOwnerOrAdmin, getPatient);
+router.get("/:id", verifyToken, isOwner, isAdmin, getPatient);
 
 // Delete a single Patient
-router.delete("/:id", verifyToken, isOwnerOrAdmin, deletePatient);
+router.delete("/:id", verifyToken, isOwner, isAdmin, deletePatient);
 
 module.exports = router;

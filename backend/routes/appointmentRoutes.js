@@ -15,8 +15,9 @@ const {
 } = require("../controllers/appointment.js");
 const {
   verifyToken,
-  isOwnerOrAdmin,
   isAdmin,
+  isOwner,
+  isDoctor,
 } = require("../middlewares/authRole.js");
 const express = require("express");
 
@@ -26,46 +27,97 @@ const router = express.Router();
 router.post("/", verifyToken, createAppointment);
 
 // Update an existing Appointment
-router.put("/:id", verifyToken, isOwnerOrAdmin, updateAppointment);
+router.put("/:id", verifyToken, isOwner, isAdmin, isDoctor, updateAppointment);
 
 // Get an Appointment by ID
-router.get("/:id", verifyToken, isOwnerOrAdmin, getAppointmentById);
+router.get("/:id", verifyToken, isOwner, isAdmin, isDoctor, getAppointmentById);
 
 // Get all Appointments
-router.get("/", verifyToken, isAdmin, getAppointments);
+router.get("/", verifyToken, isAdmin, isDoctor, getAppointments);
 
 // Delete an Appointment
-router.delete("/:id", verifyToken, isOwnerOrAdmin, deleteAppointment);
+router.delete(
+  "/:id",
+  verifyToken,
+  isOwner,
+  isAdmin,
+  isDoctor,
+  deleteAppointment
+);
 
 // Reschedule an Appointment
-router.put("/:id/reschedule", verifyToken, rescheduleAppointment);
+router.put(
+  "/:id/reschedule",
+  verifyToken,
+  isOwner,
+  isAdmin,
+  isDoctor,
+  rescheduleAppointment
+);
 
 // Update an Appointment's status
-router.put("/:id/status", verifyToken, updateAppointmentStatus);
+router.put(
+  "/:id/status",
+  verifyToken,
+  isDoctor,
+  isAdmin,
+  updateAppointmentStatus
+);
 
 // Get all Appointments by Patient
-router.get("/patients/:patientId", verifyToken, getAppointmentsByPatient);
+router.get(
+  "/patients/:patientId",
+  verifyToken,
+  isOwner,
+  isAdmin,
+  isDoctor,
+  getAppointmentsByPatient
+);
 
 // Get all Active Appointments by Patient
-router.get("/patients/:patientId/active", verifyToken, getActiveAppointmentsByPatient);
+router.get(
+  "/patients/:patientId/active",
+  verifyToken,
+  isOwner,
+  isAdmin,
+  isDoctor,
+  getActiveAppointmentsByPatient
+);
 
 // Get all Upcoming Appointments by Patient
 router.get(
   "/patients/:patientId/upcoming",
   verifyToken,
+  isOwner,
+  isAdmin,
+  isDoctor,
   getUpcomingAppointmentsByPatient
 );
 
 // Get all Appointments by Doctor
-router.get("/doctors/:doctorId", verifyToken, getAppointmentsByDoctor);
+router.get(
+  "/doctors/:doctorId",
+  verifyToken,
+  isDoctor,
+  isAdmin,
+  getAppointmentsByDoctor
+);
 
 // Get all Active Appointments by Doctor
-router.get("/doctors/:doctorId/active", verifyToken, getActiveAppointmentsByDoctor);
+router.get(
+  "/doctors/:doctorId/active",
+  verifyToken,
+  isDoctor,
+  isAdmin,
+  getActiveAppointmentsByDoctor
+);
 
 // Get all Upcoming Appointments by Doctor
 router.get(
   "/doctors/:doctorId/upcoming",
   verifyToken,
+  isDoctor,
+  isAdmin,
   getUpcomingAppointmentsByDoctor
 );
 
