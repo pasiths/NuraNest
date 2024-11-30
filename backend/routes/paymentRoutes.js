@@ -4,6 +4,7 @@ const {
   getAllPayments,
   getPaymentById,
   deletePayment,
+  getPaymentsByPatientId,
 } = require("../controllers/payment.js");
 const {
   verifyToken,
@@ -25,6 +26,9 @@ router.get("/", verifyToken, isAdmin, getAllPayments);
 
 // Get a Payment by ID
 router.get("/:id", verifyToken, isOwnerOrAdmin, getPaymentById);
+
+// Get Payments by Patient ID
+router.get("/patient/:id", verifyToken, isOwnerOrAdmin, getPaymentsByPatientId);
 
 // Delete a Payment
 router.delete("/:id", verifyToken, isOwnerOrAdmin, deletePayment);
