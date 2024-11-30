@@ -138,3 +138,23 @@ exports.deletePayment = async (req, res) => {
     });
   }
 };
+
+// Get all Payments by Patient ID
+exports.getPaymentsByPatientId = async (req, res) => {
+  const { patientId } = req.params;
+
+  try {
+    const payments = await Payment.findAll({
+      where: { patientId },
+    });
+
+    logger.info("Payments retrieved successfully");
+    return res.status(200).json({ payments });
+  } catch (error) {
+    logger.error("Error getting the payments", error);
+    return res.status(500).json({
+      message: "Unable to get the payments",
+      error: error.message,
+    });
+  }
+};
