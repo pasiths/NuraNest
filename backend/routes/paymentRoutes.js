@@ -28,7 +28,7 @@ router.get("/", verifyToken, isAdmin, getAllPayments);
 router.get("/:id", verifyToken, isOwnerOrAdmin, getPaymentById);
 
 // Get Payments by Patient ID
-router.get("/patient/:id", verifyToken, isOwnerOrAdmin, getPaymentsByPatientId);
+router.get("/patients/:patientId", verifyToken, isOwnerOrAdmin, getPaymentsByPatientId);
 
 // Delete a Payment
 router.delete("/:id", verifyToken, isOwnerOrAdmin, deletePayment);

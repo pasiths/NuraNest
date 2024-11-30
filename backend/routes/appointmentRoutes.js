@@ -44,27 +44,27 @@ router.put("/:id/reschedule", verifyToken, rescheduleAppointment);
 router.put("/:id/status", verifyToken, updateAppointmentStatus);
 
 // Get all Appointments by Patient
-router.get("/patient/:id", verifyToken, getAppointmentsByPatient);
+router.get("/patients/:patientId", verifyToken, getAppointmentsByPatient);
 
 // Get all Active Appointments by Patient
-router.get("/patient/:id/active", verifyToken, getActiveAppointmentsByPatient);
+router.get("/patients/:patientId/active", verifyToken, getActiveAppointmentsByPatient);
 
 // Get all Upcoming Appointments by Patient
 router.get(
-  "/patient/:id/upcoming",
+  "/patients/:patientId/upcoming",
   verifyToken,
   getUpcomingAppointmentsByPatient
 );
 
 // Get all Appointments by Doctor
-router.get("/doctor/:id", verifyToken, getAppointmentsByDoctor);
+router.get("/doctors/:doctorId", verifyToken, getAppointmentsByDoctor);
 
 // Get all Active Appointments by Doctor
-router.get("/doctor/:id/active", verifyToken, getActiveAppointmentsByDoctor);
+router.get("/doctors/:doctorId/active", verifyToken, getActiveAppointmentsByDoctor);
 
 // Get all Upcoming Appointments by Doctor
 router.get(
-  "/doctor/:id/upcoming",
+  "/doctors/:doctorId/upcoming",
   verifyToken,
   getUpcomingAppointmentsByDoctor
 );

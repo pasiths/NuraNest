@@ -1,5 +1,6 @@
 const Appointment = require("../models/Appointment.js");
 const logger = require("../middlewares/logger.js");
+const { Op } = require("sequelize");
 
 // Create an Appointment
 exports.createAppointment = async (req, res) => {
