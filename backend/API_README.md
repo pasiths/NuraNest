@@ -260,7 +260,62 @@
 - **URL:** `appointments/:id`
 - **Method:** `DELETE`
 
-#### 30. **Create a Payment**
+#### 30. **Reschedule an Appointment**
+
+- **URL:** `appointments/:id/reschedule`
+- **Method:** `PUT`
+- **Request Body:**
+
+```json
+{
+  "appointmentDate": "2024-12-10",
+  "appointmentTime": "16:00"
+}
+```
+
+#### 31. **Update an Appointment Status**
+
+- **URL:** `appointments/:id/status`
+- **Method:** `PUT`
+- **Request Body:**
+
+```json
+{
+  "status": "completed"
+}
+```
+
+#### 32. **Get Appointments by Patient**
+
+- **URL:** `appointments/patients/:patientId`
+- **Method:** `GET`
+
+#### 33. **Get Active Appointments of a Patient**
+
+- **URL:** `appointments/patients/:patientId/active`
+- **Method:** `GET`
+
+#### 34. **Get Upcoming Appointments of a Patient**
+
+- **URL:** `appointments/patients/:patientId/upcoming`
+- **Method:** `GET`
+
+#### 35. **Get Appointments by Doctor**
+
+- **URL:** `appointments/doctors/:doctorId`
+- **Method:** `GET`
+
+#### 36. **Get Active Appointments of a Doctor**
+
+- **URL:** `appointments/doctors/:doctorId/active`
+- **Method:** `GET`
+
+#### 37. **Get Upcoming Appointments of a Doctor**
+
+- **URL:** `appointments/doctors/:doctorId/upcoming`
+- **Method:** `GET`
+
+#### 38. **Create a Payment**
 
 - **URL:** `payments/`
 - **Method:** `POST`
@@ -276,7 +331,7 @@
 }
 ```
 
-#### 31. **Update a Payment**
+#### 39. **Update a Payment**
 
 - **URL:** `payments/:id`
 - **Method:** `PUT`
@@ -288,17 +343,22 @@
 }
 ```
 
-#### 32. **Get all Payments**
+#### 40. **Get all Payments**
 
 - **URL:** `payments/`
 - **Method:** `GET`
 
-#### 33. **Get a Payment by ID**
+#### 41. **Get a Payment by ID**
 
 - **URL:** `payments/:id`
 - **Method:** `GET`
 
-#### 34. **Delete a Payment**
+#### 42. **Get a Payment by Patient ID**
+
+- **URL:** `payments/patients/:patientId`
+- **Method:** `GET`
+
+#### 43. **Delete a Payment**
 
 - **URL:** `payments/:id`
 - **Method:** `DELETE`
