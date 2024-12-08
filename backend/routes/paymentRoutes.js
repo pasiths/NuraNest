@@ -6,7 +6,7 @@ const {
   deletePayment,
   getPaymentsByPatientId,
 } = require("../controllers/payment.js");
-const { verifyToken, isAdmin } = require("../middlewares/authRole.js");
+const { verifyToken, isAdmin, isOwner } = require("../middlewares/authRole.js");
 const express = require("express");
 
 const router = express.Router();
