@@ -1,5 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
+
+const cors = require("cors");
+
 const sequelize = require("./connect.js");
 const cookieParser = require("cookie-parser");
 require("./models/associations.js");
@@ -35,6 +38,9 @@ const PORT = process.env.PORT || 8080;
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+// Middleware to enable CORS
+app.use(cors());
 
 // Middleware to parse cookies
 app.use(cookieParser());
