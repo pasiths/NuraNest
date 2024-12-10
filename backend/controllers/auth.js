@@ -4,6 +4,9 @@ const dotenv = require("dotenv");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 const logger = require("../middlewares/logger.js");
+const Admin = require("../models/Admin.js");
+const Doctor = require("../models/Doctor.js");
+const Patient = require("../models/Patient.js");
 
 dotenv.config();
 
@@ -39,6 +42,15 @@ exports.register = async (req, res) => {
       role,
       status: true,
     });
+
+    // Check and insert the user into the respective role table
+    if (role === "admin") {
+      await Admin.create({ userId: newUser.id });
+    } else if (role === "doctor") {
+      await Doctor.create({ userId: newUser.id });
+    } else if (role === "patient") {
+      await Patient.create({ userId: newUser.id });
+    }
 
     // Generate a JWT Token
     const token = jwt.sign(

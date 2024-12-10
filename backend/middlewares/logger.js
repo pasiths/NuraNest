@@ -10,7 +10,7 @@ const logFormat = printf(({ level, message, label, timestamp, stack }) => {
 // Create a logger instance
 const logger = winston.createLogger({
   format: combine(
-    label({ label: "Hotel Management System" }),
+    label({ label: "NuraNest" }),
     timestamp(),
     errors({ stack: true }),
     logFormat
