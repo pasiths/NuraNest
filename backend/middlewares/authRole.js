@@ -37,7 +37,7 @@ exports.isAdmin = (req, res, next) => {
 
 // Middleware to check if the user is the owner of the resource
 exports.isOwner = (req, res, next) => {
-  if (req.user.id !== req.params.id) {
+  if (req.user.id !== parseInt(req.params.id)) {
     return res.status(403).json({ message: "Access Denied! Unauthorized" });
   }
 
