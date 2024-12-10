@@ -18,6 +18,8 @@ const {
   isAdmin,
   isOwner,
   isDoctor,
+  isOwnerOrAdmin,
+  isOwnerOrDoctor,
 } = require("../middlewares/authRole.js");
 const express = require("express");
 
@@ -27,10 +29,10 @@ const router = express.Router();
 router.post("/", verifyToken, createAppointment);
 
 // Update an existing Appointment
-router.put("/:id", verifyToken, isOwner, isAdmin, isDoctor, updateAppointment);
+router.put("/:id", verifyToken, isOwnerOrDoctor, isAdmin, updateAppointment);
 
 // Get an Appointment by ID
-router.get("/:id", verifyToken, isOwner, isAdmin, isDoctor, getAppointmentById);
+router.get("/:id", verifyToken, isOwnerOrDoctor, isAdmin, getAppointmentById);
 
 // Get all Appointments
 router.get("/", verifyToken, isAdmin, isDoctor, getAppointments);
@@ -39,9 +41,7 @@ router.get("/", verifyToken, isAdmin, isDoctor, getAppointments);
 router.delete(
   "/:id",
   verifyToken,
-  isOwner,
-  isAdmin,
-  isDoctor,
+  isOwnerOrAdmin,
   deleteAppointment
 );
 
@@ -68,8 +68,7 @@ router.put(
 router.get(
   "/patients/:patientId",
   verifyToken,
-  isOwner,
-  isAdmin,
+  isOwnerOrAdmin,
   isDoctor,
   getAppointmentsByPatient
 );
