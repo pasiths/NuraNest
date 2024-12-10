@@ -52,3 +52,24 @@ exports.isDoctor = (req, res, next) => {
 
   next();
 };
+
+// Middleware to check if the user is the owner of the resource or an admin
+exports.isOwnerOrAdmin = (req, res, next) => {
+  if (req.user.role !== "admin" && req.user.id !== parseInt(req.params.id)) {
+    return res.status(403).json({ message: "Access Denied! Unauthorized" });
+  }
+
+  next();
+};
+
+// Middleware to check if the user is the owner of the resource or the assigned doctor
+exports.isOwnerOrDoctor = (req, res, next) => {
+  if (
+    req.user.id !== parseInt(req.params.id) &&
+    req.user.role !== "doctor"
+  ) {
+    return res.status(403).json({ message: "Access Denied! Unauthorized" });
+  }
+
+  next();
+};
