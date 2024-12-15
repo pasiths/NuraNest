@@ -5,6 +5,7 @@ const Admin = require("./Admin.js");
 const Appointment = require("./Appointment.js");
 const Payment = require("./Payment.js");
 const Blog = require("./Blog.js");
+const Application = require("./Application.js");
 
 // User associations
 User.hasOne(Admin, { foreignKey: "userId" });
@@ -32,4 +33,13 @@ Patient.hasMany(Payment, { foreignKey: "patientId" });
 Payment.belongsTo(Patient, { foreignKey: "patientId" });
 
 // Export all models to use in other parts of the app
-module.exports = { User, Doctor, Patient, Admin, Appointment, Payment, Blog };
+module.exports = {
+  User,
+  Doctor,
+  Patient,
+  Admin,
+  Appointment,
+  Payment,
+  Blog,
+  Application,
+};

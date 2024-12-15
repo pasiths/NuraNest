@@ -1,8 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
 const cors = require("cors");
-
 const sequelize = require("./connect.js");
 const cookieParser = require("cookie-parser");
 require("./models/associations.js");
@@ -14,6 +12,7 @@ const patientRoutes = require("./routes/patientRoutes.js");
 const blogRoutes = require("./routes/blogRoutes.js");
 const appointmentRoutes = require("./routes/appointmentRoutes.js");
 const paymentRoutes = require("./routes/paymentRoutes.js");
+const applicationRoutes = require("./routes/applicationRoutes.js");
 const logger = require("./middlewares/logger.js");
 
 dotenv.config();
@@ -54,6 +53,7 @@ app.use("/patients", patientRoutes);
 app.use("/blogs", blogRoutes);
 app.use("/appointments", appointmentRoutes);
 app.use("/payments", paymentRoutes);
+app.use("/applications", applicationRoutes);
 
 app.listen(PORT, IP, () => {
   console.log(`Server is running on port ${PORT}`);
