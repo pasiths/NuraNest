@@ -362,3 +362,50 @@
 
 - **URL:** `payments/:id`
 - **Method:** `DELETE`
+
+#### 44. **Create an Application to apply as a Doctor**
+
+- **URL:** `applications/`
+- **Method:** `POST`
+- **Request Body:** 
+
+```json
+{
+  "name": "Dr. Jane Doe",
+  "email": "jane.doe@example.com",
+  "address": "123 Health St, Wellness City",
+  "contactNo": "+1234567890",
+  "qualification": "MBBS, MD",
+  "specialization": "Cardiology",
+  "workplace": "City Hospital",
+  "consultationFee": 150.00,
+  "availableDays": ["Monday", "Wednesday", "Friday"]
+}
+```
+
+#### 45. **Update an Application**
+
+- **URL:** `applications/:id`
+- **Method:** `PUT`
+- **Request Body:**
+
+```json
+{
+  "name": "Dr. Jane"
+}
+```
+
+#### 46. **Get all Applications**
+
+- **URL:** `applications/`
+- **Method:** `GET`
+
+#### 47. **Get an Application by ID**
+
+- **URL:** `applications/:id`
+- **Method:** `GET`
+
+#### 48. **Delete an Application**
+
+- **URL:** `applications/:id`
+- **Method:** `DELETE`
