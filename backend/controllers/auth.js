@@ -14,7 +14,7 @@ const JWT_SECRET = process.env.JWT;
 
 // Register a new user
 exports.register = async (req, res) => {
-  const { username, email, password, firstName, lastName, role } = req.body;
+  const { username, email, password, contactNo, role } = req.body;
 
   try {
     // Check if the user already exists
@@ -37,8 +37,7 @@ exports.register = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      firstName,
-      lastName,
+      contactNo,
       role,
       status: true,
     });
