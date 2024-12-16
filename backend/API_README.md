@@ -409,3 +409,14 @@
 
 - **URL:** `applications/:id`
 - **Method:** `DELETE`
+
+#### 49. **Mental Health Companion Chatbot**
+
+- **URL:** `{ngrok_access_link}/chat`
+- **Method:** `POST`
+
+```json
+{
+  "message": "I am kinda stressed because of my project and the upcoming deadline"
+}
+```
