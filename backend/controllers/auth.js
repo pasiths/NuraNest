@@ -113,7 +113,7 @@ exports.login = async (req, res) => {
     res
       .cookie("accessToken", token, { httpOnly: true, secure: true })
       .status(200)
-      .json({ message: "User logged in successfully!", user: userData });
+      .json({ message: "User logged in successfully!", token, user: userData });
   } catch (error) {
     logger.error("Error logging in user: ", error);
     return res

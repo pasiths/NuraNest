@@ -39,6 +39,10 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 
 // Middleware to enable CORS
+const corsOptions = {
+  origin: 'http://localhost:3000', // Allow requests from the frontend URL
+  credentials: true,               // Allow credentials (cookies, tokens, etc.)
+};
 app.use(cors());
 
 // Middleware to parse cookies
