@@ -41,17 +41,7 @@
 - **URL:** `auth/logout`
 - **Method:** `POST`
 
-#### 4. **Retrieve User by ID**
-
-- **URL:** `users/:id`
-- **Method:** `GET`
-
-#### 7. **Retrieve Users**
-
-- **URL:** `users/`
-- **Method:** `GET`
-
-#### 6. **Update a User**
+#### 4. **Update a User**
 
 - **URL:** `users/:id`
 - **Method:** `PUT`
@@ -63,12 +53,27 @@
 }
 ```
 
-#### 7. **Delete User by ID**
+#### 5. **Retrieve User by ID**
+
+- **URL:** `users/:id`
+- **Method:** `GET`
+
+#### 6. **Retrieve Users**
+
+- **URL:** `users/`
+- **Method:** `GET`
+
+#### 7. **Retrieve Users based on Role**
+
+- **URL:** `users/role/:role`
+- **Method:** `GET`
+
+#### 8. **Delete User by ID**
 
 - **URL:** `users/:id`
 - **Method:** `DELETE`
 
-#### 8. **Create an Admin**
+#### 9. **Create an Admin**
 
 - **URL:** `admins/`
 - **Method:** `POST`
@@ -80,12 +85,12 @@
 }
 ```
 
-#### 9. **Delete an Admin**
+#### 10. **Delete an Admin**
 
 - **URL:** `admins/:id`
 - **Method:** `DELETE`
 
-#### 10. **Create a Doctor**
+#### 11. **Create a Doctor**
 
 - **URL:** `doctors/`
 - **Method:** `POST`
@@ -102,7 +107,7 @@
 }
 ```
 
-#### 11. **Update a Doctor**
+#### 12. **Update a Doctor**
 
 - **URL:** `doctors/:id`
 - **Method:** `PUT`
@@ -116,22 +121,22 @@
 }
 ```
 
-#### 12. **Get all Doctors**
+#### 13. **Get all Doctors**
 
 - **URL:** `doctors/`
 - **Method:** `GET`
 
-#### 13. **Get Doctor by ID**
+#### 14. **Get Doctor by ID**
 
 - **URL:** `doctors/:id`
 - **Method:** `GET`
 
-#### 14. **Delete a Doctor**
+#### 15. **Delete a Doctor**
 
 - **URL:** `doctors/:id`
 - **Method:** `DELETE`
 
-#### 15. **Create a Patient**
+#### 16. **Create a Patient**
 
 - **URL:** `patients/`
 - **Method:** `POST`
@@ -144,7 +149,7 @@
 }
 ```
 
-#### 16. **Update a Patient**
+#### 17. **Update a Patient**
 
 - **URL:** `patients/:id`
 - **Method:** `PUT`
@@ -156,22 +161,22 @@
 }
 ```
 
-#### 17. **Get all Patients**
+#### 18. **Get all Patients**
 
 - **URL:** `patients/`
 - **Method:** `GET`
 
-#### 18. **Get a Patient by ID**
+#### 19. **Get a Patient by ID**
 
 - **URL:** `patients/:id`
 - **Method:** `GET`
 
-#### 19. **Delete a Patient**
+#### 20. **Delete a Patient**
 
 - **URL:** `patients/`
 - **Method:** `DELETE`
 
-#### 20. **Create a Blog post**
+#### 21. **Create a Blog post**
 
 - **URL:** `blogs/`
 - **Method:** `POST`
@@ -188,7 +193,7 @@
 }
 ```
 
-#### 21. **Update a Blog post**
+#### 22. **Update a Blog post**
 
 - **URL:** `blogs/:id`
 - **Method:** `PUT`
@@ -200,22 +205,22 @@
 }
 ```
 
-#### 22. **Retrieve a Blog post by ID**
+#### 23. **Retrieve a Blog post by ID**
 
 - **URL:** `blogs/:id`
 - **Method:** `GET`
 
-#### 23. **Retrieve Blog posts**
+#### 24. **Retrieve Blog posts**
 
 - **URL:** `blogs/`
 - **Method:** `GET`
 
-#### 24. **Delete a Blog post**
+#### 25. **Delete a Blog post**
 
 - **URL:** `blogs/:id`
 - **Method:** `DELETE`
 
-#### 25. **Create an Appointment**
+#### 26. **Create an Appointment**
 
 - **URL:** `appointments/`
 - **Method:** `POST`
@@ -233,7 +238,7 @@
 }
 ```
 
-#### 26. **Update an Appointment**
+#### 27. **Update an Appointment**
 
 - **URL:** `appointments/:id`
 - **Method:** `PUT`
@@ -245,22 +250,22 @@
 }
 ```
 
-#### 27. **Get all Appointments**
+#### 28. **Get all Appointments**
 
 - **URL:** `appointments/`
 - **Method:** `GET`
 
-#### 28. **Get an Appointment by ID**
+#### 29. **Get an Appointment by ID**
 
 - **URL:** `appointments/:id`
 - **Method:** `GET`
 
-#### 29. **Delete an Appointment**
+#### 30. **Delete an Appointment**
 
 - **URL:** `appointments/:id`
 - **Method:** `DELETE`
 
-#### 30. **Reschedule an Appointment**
+#### 31. **Reschedule an Appointment**
 
 - **URL:** `appointments/:id/reschedule`
 - **Method:** `PUT`
@@ -273,7 +278,7 @@
 }
 ```
 
-#### 31. **Update an Appointment Status**
+#### 32. **Update an Appointment Status**
 
 - **URL:** `appointments/:id/status`
 - **Method:** `PUT`
@@ -285,37 +290,37 @@
 }
 ```
 
-#### 32. **Get Appointments by Patient**
+#### 33. **Get Appointments by Patient**
 
 - **URL:** `appointments/patients/:patientId`
 - **Method:** `GET`
 
-#### 33. **Get Active Appointments of a Patient**
+#### 34. **Get Active Appointments of a Patient**
 
 - **URL:** `appointments/patients/:patientId/active`
 - **Method:** `GET`
 
-#### 34. **Get Upcoming Appointments of a Patient**
+#### 35. **Get Upcoming Appointments of a Patient**
 
 - **URL:** `appointments/patients/:patientId/upcoming`
 - **Method:** `GET`
 
-#### 35. **Get Appointments by Doctor**
+#### 36. **Get Appointments by Doctor**
 
 - **URL:** `appointments/doctors/:doctorId`
 - **Method:** `GET`
 
-#### 36. **Get Active Appointments of a Doctor**
+#### 37. **Get Active Appointments of a Doctor**
 
 - **URL:** `appointments/doctors/:doctorId/active`
 - **Method:** `GET`
 
-#### 37. **Get Upcoming Appointments of a Doctor**
+#### 38. **Get Upcoming Appointments of a Doctor**
 
 - **URL:** `appointments/doctors/:doctorId/upcoming`
 - **Method:** `GET`
 
-#### 38. **Create a Payment**
+#### 39. **Create a Payment**
 
 - **URL:** `payments/`
 - **Method:** `POST`
@@ -331,7 +336,7 @@
 }
 ```
 
-#### 39. **Update a Payment**
+#### 40. **Update a Payment**
 
 - **URL:** `payments/:id`
 - **Method:** `PUT`
@@ -343,27 +348,27 @@
 }
 ```
 
-#### 40. **Get all Payments**
+#### 41. **Get all Payments**
 
 - **URL:** `payments/`
 - **Method:** `GET`
 
-#### 41. **Get a Payment by ID**
+#### 42. **Get a Payment by ID**
 
 - **URL:** `payments/:id`
 - **Method:** `GET`
 
-#### 42. **Get a Payment by Patient ID**
+#### 43. **Get a Payment by Patient ID**
 
 - **URL:** `payments/patients/:patientId`
 - **Method:** `GET`
 
-#### 43. **Delete a Payment**
+#### 44. **Delete a Payment**
 
 - **URL:** `payments/:id`
 - **Method:** `DELETE`
 
-#### 44. **Create an Application to apply as a Doctor**
+#### 45. **Create an Application to apply as a Doctor**
 
 - **URL:** `applications/`
 - **Method:** `POST`
@@ -383,7 +388,7 @@
 }
 ```
 
-#### 45. **Update an Application**
+#### 46. **Update an Application**
 
 - **URL:** `applications/:id`
 - **Method:** `PUT`
@@ -395,22 +400,22 @@
 }
 ```
 
-#### 46. **Get all Applications**
+#### 47. **Get all Applications**
 
 - **URL:** `applications/`
 - **Method:** `GET`
 
-#### 47. **Get an Application by ID**
+#### 48. **Get an Application by ID**
 
 - **URL:** `applications/:id`
 - **Method:** `GET`
 
-#### 48. **Delete an Application**
+#### 49. **Delete an Application**
 
 - **URL:** `applications/:id`
 - **Method:** `DELETE`
 
-#### 49. **Mental Health Companion Chatbot**
+#### 50. **Mental Health Companion Chatbot**
 
 - **URL:** `{ngrok_access_link}/chat`
 - **Method:** `POST`

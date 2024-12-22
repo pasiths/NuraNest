@@ -118,6 +118,26 @@ exports.getUsers = async (req, res) => {
   }
 };
 
+// Get user by role
+exports.getUserByRole = async (req, res) => {
+  const { role } = req.params;
+
+  try {
+    // Find the user by role
+    const users = await User.findAll({
+      where: { role, status: true },
+    });
+
+    logger.info("Users fetched successfully");
+    return res.status(200).json({ users });
+  } catch (error) {
+    logger.error("Error fetching the users", error);
+    return res
+      .status(500)
+      .json({ message: "Unable to get the users", error: error.message });
+  }
+};
+
 // Delete a user (set status to false)
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;
