@@ -5,10 +5,13 @@ const { Op } = require("sequelize");
 // Create a new application
 exports.createApplication = async (req, res) => {
   const {
-    name,
+    firstName,
+    lastName,
     email,
     address,
     contactNo,
+    dob,
+    gender,
     qualification,
     specialization,
     workplace,
@@ -19,10 +22,13 @@ exports.createApplication = async (req, res) => {
   try {
     // Create a new Application
     const application = await Application.create({
-      name,
+      firstName,
+      lastName,
       email,
       address,
       contactNo,
+      dob,
+      gender,
       qualification,
       specialization,
       workplace,
@@ -46,10 +52,13 @@ exports.createApplication = async (req, res) => {
 exports.updateApplication = async (req, res) => {
   const { id } = req.params;
   const {
-    name,
+    firstName,
+    lastName,
     email,
     address,
     contactNo,
+    dob,
+    gender,
     qualification,
     specialization,
     workplace,
@@ -66,8 +75,12 @@ exports.updateApplication = async (req, res) => {
     }
 
     // Update the Application
-    if (name) {
-      application.name = name;
+    if (firstName) {
+      application.firstName = firstName;
+    }
+
+    if (lastName) {
+      application.lastName = lastName;
     }
 
     if (email) {
@@ -80,6 +93,14 @@ exports.updateApplication = async (req, res) => {
 
     if (contactNo) {
       application.contactNo = contactNo;
+    }
+
+    if (dob) {
+      application.dob = dob;
+    }
+
+    if (gender) {
+      application.gender = gender;
     }
 
     if (qualification) {
