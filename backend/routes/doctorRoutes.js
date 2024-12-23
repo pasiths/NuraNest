@@ -4,6 +4,7 @@ const {
   getAllDoctors,
   getDoctorById,
   deleteDoctor,
+  getDoctorByUserId,
 } = require("../controllers/doctor.js");
 const { verifyToken, isOwner, isAdmin } = require("../middlewares/authRole.js");
 const express = require("express");
@@ -21,6 +22,9 @@ router.get("/", verifyToken, getAllDoctors);
 
 // Get a single Doctor
 router.get("/:id", verifyToken, getDoctorById);
+
+// Find Doctor by User ID
+router.get("/user/:userId", verifyToken, getDoctorByUserId);
 
 // Delete a Doctor
 router.delete("/:id", verifyToken, isOwner, isAdmin, deleteDoctor);
