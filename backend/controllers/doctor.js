@@ -149,3 +149,25 @@ exports.deleteDoctor = async (req, res) => {
     });
   }
 };
+
+// Find Doctor by User ID
+exports.getDoctorByUserId = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const doctor = await Doctor.findOne({ where: { userId } });
+
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+
+    logger.info("Doctor fetched successfully");
+    return res.status(200).json({ doctor });
+  } catch (error) {
+    logger.error("Error fetching the doctor", error);
+    return res.status(500).json({
+      message: "Unable to fetch the doctor",
+      error: error.message,
+    });
+  }
+};
