@@ -5,6 +5,7 @@ const { Op } = require("sequelize");
 // Create a new application
 exports.createApplication = async (req, res) => {
   const {
+    username,
     firstName,
     lastName,
     email,
@@ -22,6 +23,7 @@ exports.createApplication = async (req, res) => {
   try {
     // Create a new Application
     const application = await Application.create({
+      username,
       firstName,
       lastName,
       email,
@@ -52,6 +54,7 @@ exports.createApplication = async (req, res) => {
 exports.updateApplication = async (req, res) => {
   const { id } = req.params;
   const {
+    username,
     firstName,
     lastName,
     email,
@@ -75,6 +78,10 @@ exports.updateApplication = async (req, res) => {
     }
 
     // Update the Application
+    if (username) {
+      application.username = username;
+    }
+
     if (firstName) {
       application.firstName = firstName;
     }

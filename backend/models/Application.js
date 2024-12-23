@@ -5,6 +5,11 @@ const sequelize = require("../connect.js");
 const Application = sequelize.define(
   "Application",
   {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
