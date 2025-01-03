@@ -11,13 +11,13 @@ const express = require("express");
 const router = express.Router();
 
 // Update a user
-router.put("/:id", verifyToken, isOwner, isAdmin, updateUser);
+router.put("/:id", verifyToken,  updateUser);
 
 // Get a user by ID
-router.get("/:id", verifyToken, isOwner, isAdmin, getUser);
+router.get("/:id", verifyToken,  getUser);
 
 // Get all users
-router.get("/", verifyToken, isAdmin, getUsers);
+router.get("/", verifyToken,  getUsers);
 
 // Get user by role
 router.get("/role/:role", verifyToken, isAdmin, getUserByRole);

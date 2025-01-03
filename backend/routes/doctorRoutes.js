@@ -15,7 +15,7 @@ const router = express.Router();
 router.post("/", verifyToken, createDoctor);
 
 // Update a Doctor
-router.put("/:id", verifyToken, isOwner, isAdmin, updateDoctor);
+router.put("/:id", verifyToken,  updateDoctor);
 
 // Get all Doctors
 router.get("/", verifyToken, getAllDoctors);

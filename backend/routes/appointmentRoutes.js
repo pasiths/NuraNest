@@ -29,19 +29,19 @@ const router = express.Router();
 router.post("/", verifyToken, createAppointment);
 
 // Update an existing Appointment
-router.put("/:id", verifyToken, isOwnerOrDoctor, isAdmin, updateAppointment);
+router.put("/:id", verifyToken,   updateAppointment);
 
 // Get an Appointment by ID
-router.get("/:id", verifyToken, isOwnerOrDoctor, isAdmin, getAppointmentById);
+router.get("/:id", verifyToken,  getAppointmentById);
 
 // Get all Appointments
-router.get("/", verifyToken, isAdmin, isDoctor, getAppointments);
+router.get("/", verifyToken,  getAppointments);
 
 // Delete an Appointment
 router.delete(
   "/:id",
   verifyToken,
-  isOwnerOrAdmin,
+ 
   deleteAppointment
 );
 
@@ -49,9 +49,7 @@ router.delete(
 router.put(
   "/:id/reschedule",
   verifyToken,
-  isOwner,
-  isAdmin,
-  isDoctor,
+  
   rescheduleAppointment
 );
 
@@ -68,8 +66,7 @@ router.put(
 router.get(
   "/patients/:patientId",
   verifyToken,
-  isOwnerOrAdmin,
-  isDoctor,
+  
   getAppointmentsByPatient
 );
 
@@ -77,9 +74,7 @@ router.get(
 router.get(
   "/patients/:patientId/active",
   verifyToken,
-  isOwner,
-  isAdmin,
-  isDoctor,
+ 
   getActiveAppointmentsByPatient
 );
 
@@ -87,27 +82,25 @@ router.get(
 router.get(
   "/patients/:patientId/upcoming",
   verifyToken,
-  isOwner,
-  isAdmin,
-  isDoctor,
+ 
   getUpcomingAppointmentsByPatient
 );
 
 // Get all Appointments by Doctor
 router.get(
   "/doctors/:doctorId",
-  verifyToken,
-  isDoctor,
-  isAdmin,
+  // verifyToken,
+  // isDoctor,
+  // isAdmin,
   getAppointmentsByDoctor
 );
 
 // Get all Active Appointments by Doctor
 router.get(
   "/doctors/:doctorId/active",
-  verifyToken,
-  isDoctor,
-  isAdmin,
+  // verifyToken,
+  // isDoctor,
+  // isAdmin,
   getActiveAppointmentsByDoctor
 );
 
@@ -115,8 +108,8 @@ router.get(
 router.get(
   "/doctors/:doctorId/upcoming",
   verifyToken,
-  isDoctor,
-  isAdmin,
+  // isDoctor,
+  // isAdmin,
   getUpcomingAppointmentsByDoctor
 );
 
